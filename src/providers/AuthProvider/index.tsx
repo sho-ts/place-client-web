@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
@@ -8,10 +8,10 @@ import { Fragment } from 'react';
 const authService = new AuthService();
 
 type Props = {
-  render: (isLogin: boolean) => JSX.Element;
+  children?: ReactNode;
 };
 
-const AuthProvider: FC<Props> = ({ render }) => {
+const AuthProvider: FC<Props> = ({ children }) => {
   const router = useRouter();
   const isMounted = useRef(false);
   const [user, setUser] = useUserState();
@@ -35,7 +35,7 @@ const AuthProvider: FC<Props> = ({ render }) => {
       });
   }, []);
 
-  if (user.isLogin) return render(user.isLogin);
+  if (user.isLogin) return <Fragment>{children}</Fragment>;
   return <Fragment />;
 };
 
