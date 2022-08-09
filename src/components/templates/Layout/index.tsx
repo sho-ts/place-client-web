@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import {
   AppBar as MUIAppBar,
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children }) => {
+  const router = useRouter();
+
   return (
     <Fragment>
       <AppBar>
@@ -25,8 +28,14 @@ const Layout: FC<Props> = ({ children }) => {
       </AppBar>
       <Container>{children}</Container>
       <BottomNavigation>
-        <BottomNavigationAction icon={<Home />} />
-        <BottomNavigationAction icon={<Search />} />
+        <BottomNavigationAction
+          onClick={() => router.push('/home')}
+          icon={<Home />}
+        />
+        <BottomNavigationAction
+          onClick={() => router.push('/explore')}
+          icon={<Search />}
+        />
         <BottomNavigationAction icon={<AddBox />} />
         <BottomNavigationAction icon={<Person />} />
       </BottomNavigation>
@@ -46,11 +55,10 @@ const AppName = styled(Typography)(({ theme }) => ({
 }));
 
 const Container = styled(MUIContainer)(({ theme }) => ({
-  paddingTop: 56 + 24,
-  paddingBottom: 56,
+  padding: '72px 8px',
   minHeight: '100vh',
   '@media screen and (min-width: 600px)': {
-    paddingTop: 64 + 24,
+    paddingTop: 64 + 16,
   },
 }));
 
