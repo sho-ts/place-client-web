@@ -4,14 +4,12 @@ export type UserState = {
   isLogin: boolean;
 };
 
-export const key = 'USER_STATE';
-
 export const defaultState: UserState = {
   isLogin: false,
 };
 
 export const userState = atom<UserState>({
-  key,
+  key: 'userState',
   default: defaultState,
 });
 
