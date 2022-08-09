@@ -1,9 +1,9 @@
 import type { NextPageWithLayout } from '@/types/page';
-import type { ReactElement } from 'react';
+import type { ReactElement, FormEvent } from 'react';
 import { PostsGrid } from '@/components/organisms/post';
 import { Layout } from '@/components/templates';
 import { Fragment } from 'react';
-import { Box, Button, TextField, styled } from '@mui/material';
+import { TextField } from '@mui/material';
 
 const dummyDatas = [...Array(10)].map((_, index) => ({
   postId: `${index}`,
@@ -17,14 +17,21 @@ const dummyDatas = [...Array(10)].map((_, index) => ({
 }));
 
 const ExplorePage: NextPageWithLayout = () => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log('post');
+    try {
+    } catch (error) {
+      alert('通信エラー');
+    }
+  };
+
   return (
     <Fragment>
-      <TextField
-        sx={{ mb: 2 }}
-        fullWidth
-        label="検索"
-        variant="filled"
-      />
+      <form onSubmit={handleSubmit}>
+        <TextField sx={{ mb: 2 }} fullWidth label="検索" variant="filled" />
+      </form>
       <PostsGrid posts={dummyDatas} />
     </Fragment>
   );
