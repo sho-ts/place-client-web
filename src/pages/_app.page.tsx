@@ -1,12 +1,14 @@
-import type { AppProps } from 'next/app';
+import type { AppPropsWithLayout } from '@/types/page';
 import { Fragment } from 'react';
 import { CssBaseline } from '@mui/material';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <Fragment>
       <CssBaseline />
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </Fragment>
   );
 }
