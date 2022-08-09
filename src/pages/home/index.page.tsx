@@ -18,6 +18,6 @@ const HomePage: NextPageWithLayout = () => {
   return <PostsGrid posts={dummyDatas} />;
 };
 
-HomePage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+HomePage.getLayout = (page: ReactElement) => <Layout auth>{page}</Layout>;
 
 export default HomePage;

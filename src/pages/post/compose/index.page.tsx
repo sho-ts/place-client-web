@@ -12,6 +12,10 @@ const PostComposePage: NextPageWithLayout = () => {
   );
 };
 
-PostComposePage.getLayout = (page: ReactElement) => <Layout maxW='sm'>{page}</Layout>;
+PostComposePage.getLayout = (page: ReactElement) => (
+  <Layout auth maxW="sm">
+    {page}
+  </Layout>
+);
 
 export default PostComposePage;

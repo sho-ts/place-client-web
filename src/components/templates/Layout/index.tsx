@@ -12,16 +12,22 @@ import {
   styled,
 } from '@mui/material';
 import { Home, Search, Person, AddBox } from '@mui/icons-material';
+import { AuthProvider } from '@/providers';
 
 type Props = {
   children?: ReactNode;
   maxW?: Breakpoint;
+  auth?: boolean;
 };
 
-const Layout: FC<Props> = ({ children, maxW }) => {
+type BodyProps = {
+  isLogin?: boolean;
+};
+
+const Layout: FC<Props> = ({ children, maxW, auth }) => {
   const router = useRouter();
 
-  return (
+  const Body: FC<BodyProps> = ({ isLogin }) => (
     <Fragment>
       <AppBar>
         <Toolbar>
@@ -29,23 +35,28 @@ const Layout: FC<Props> = ({ children, maxW }) => {
         </Toolbar>
       </AppBar>
       <Container maxWidth={maxW}>{children}</Container>
-      <BottomNavigation>
-        <BottomNavigationAction
-          onClick={() => router.push('/home')}
-          icon={<Home />}
-        />
-        <BottomNavigationAction
-          onClick={() => router.push('/explore')}
-          icon={<Search />}
-        />
-        <BottomNavigationAction
-          onClick={() => router.push('/post/compose')}
-          icon={<AddBox />}
-        />
-        <BottomNavigationAction icon={<Person />} />
-      </BottomNavigation>
+      {isLogin && (
+        <BottomNavigation>
+          <BottomNavigationAction
+            onClick={() => router.push('/home')}
+            icon={<Home />}
+          />
+          <BottomNavigationAction
+            onClick={() => router.push('/explore')}
+            icon={<Search />}
+          />
+          <BottomNavigationAction
+            onClick={() => router.push('/post/compose')}
+            icon={<AddBox />}
+          />
+          <BottomNavigationAction icon={<Person />} />
+        </BottomNavigation>
+      )}
     </Fragment>
   );
+
+  if (auth) return <AuthProvider render={() => <Body isLogin={true} />} />;
+  return <Body isLogin={true} />;
 };
 
 const AppBar = styled(MUIAppBar)(({ theme }) => ({
