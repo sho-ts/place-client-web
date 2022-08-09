@@ -46,6 +46,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.email}
       />
       <TextField
+        type='password'
         onChange={changePasswordValue}
         sx={{ mb: 2 }}
         fullWidth
