@@ -1,9 +1,11 @@
 import type { FC, ReactNode } from 'react';
 import type { Breakpoint } from '@mui/system/createTheme';
+import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
 import { Fragment } from 'react';
 import { Container as MUIContainer, styled } from '@mui/material';
 import { Header, BottomNavi } from '@/components/molecules';
+import { GuestBottomNavi } from '@/components/organisms/guest';
 import { AuthProvider } from '@/providers';
 
 type Props = {
@@ -12,8 +14,11 @@ type Props = {
   auth?: boolean;
 };
 
+const omitRoutes = ['/login', '/register'];
+
 const Layout: FC<Props> = ({ children, maxW, auth }) => {
   const [user] = useUserState();
+  const router = useRouter();
 
   return (
     <Fragment>
@@ -25,7 +30,11 @@ const Layout: FC<Props> = ({ children, maxW, auth }) => {
       ) : (
         <Container maxWidth={maxW}>{children}</Container>
       )}
-      {user.isLogin && <BottomNavi />}
+      {user.isLogin ? (
+        <BottomNavi />
+      ) : (
+        omitRoutes.includes(router.pathname) || <GuestBottomNavi />
+      )}
     </Fragment>
   );
 };
