@@ -1,6 +1,7 @@
 import type { AppPropsWithLayout } from '@/types/page';
 import { Fragment } from 'react';
 import { CssBaseline } from '@mui/material';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -8,7 +9,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <Fragment>
       <CssBaseline />
-      {getLayout(<Component {...pageProps} />)}
+      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
     </Fragment>
   );
 }

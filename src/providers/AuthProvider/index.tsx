@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { CognitoUser } from 'amazon-cognito-identity-js';
+import { useUserState } from '@/states';
 import { AuthService } from '@/services';
 import { Fragment } from 'react';
 
@@ -14,15 +14,18 @@ type Props = {
 const AuthProvider: FC<Props> = ({ render }) => {
   const router = useRouter();
   const isMounted = useRef(false);
-  const [user, setUser] = useState<CognitoUser>();
+  const [user, setUser] = useUserState();
 
   useEffect(() => {
     if (isMounted.current) return;
 
     authService
       .getCurrentUser()
-      .then((result) => {
-        setUser(result.user);
+      .then(() => {
+        setUser({
+          ...user,
+          isLogin: true,
+        });
       })
       .catch(() => {
         router.push('/login');
@@ -32,7 +35,7 @@ const AuthProvider: FC<Props> = ({ render }) => {
       });
   }, []);
 
-  if (user) return render(!!user);
+  if (user.isLogin) return render(user.isLogin);
   return <Fragment />;
 };
 
