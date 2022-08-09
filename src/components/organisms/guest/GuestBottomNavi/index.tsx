@@ -5,7 +5,7 @@ import { Button } from '@/components/atoms';
 const GuestBottomNavi: FC = () => {
   return (
     <BottomNavi>
-      <Button variant="contained">ログイン</Button>
+      <Button href='/login' variant="contained">ログイン</Button>
     </BottomNavi>
   );
 };
