@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import type { Breakpoint } from '@mui/system/createTheme';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import {
@@ -14,9 +15,10 @@ import { Home, Search, Person, AddBox } from '@mui/icons-material';
 
 type Props = {
   children?: ReactNode;
+  maxW?: Breakpoint;
 };
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children, maxW }) => {
   const router = useRouter();
 
   return (
@@ -26,7 +28,7 @@ const Layout: FC<Props> = ({ children }) => {
           <AppName>PLACE</AppName>
         </Toolbar>
       </AppBar>
-      <Container>{children}</Container>
+      <Container maxWidth={maxW}>{children}</Container>
       <BottomNavigation>
         <BottomNavigationAction
           onClick={() => router.push('/home')}
@@ -36,7 +38,10 @@ const Layout: FC<Props> = ({ children }) => {
           onClick={() => router.push('/explore')}
           icon={<Search />}
         />
-        <BottomNavigationAction icon={<AddBox />} />
+        <BottomNavigationAction
+          onClick={() => router.push('/post/compose')}
+          icon={<AddBox />}
+        />
         <BottomNavigationAction icon={<Person />} />
       </BottomNavigation>
     </Fragment>

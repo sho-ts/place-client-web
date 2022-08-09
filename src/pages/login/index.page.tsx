@@ -22,6 +22,6 @@ const LoginPage: NextPageWithLayout = () => {
   return <AuthForm handle={handleLogin} buttonInnerText="ログイン" />;
 };
 
-LoginPage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+LoginPage.getLayout = (page: ReactElement) => <Layout maxW='sm'>{page}</Layout>;
 
 export default LoginPage;

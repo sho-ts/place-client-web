@@ -25,6 +25,8 @@ const RegisterPage: NextPageWithLayout = () => {
   return <AuthForm handle={handleRegister} buttonInnerText="新規登録" />;
 };
 
-RegisterPage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+RegisterPage.getLayout = (page: ReactElement) => (
+  <Layout maxW="sm">{page}</Layout>
+);
 
 export default RegisterPage;

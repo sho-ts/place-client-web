@@ -1,7 +1,10 @@
 import type { FC, ChangeEvent } from 'react';
 
 import { useState, useCallback } from 'react';
-import { Box, Button, TextField, styled } from '@mui/material';
+
+import { TextField } from '@mui/material';
+import { Button } from '@/components/atoms'
+import { Fragment } from 'react';
 
 type Props = {
   handle: (email: string, password: string) => void;
@@ -36,7 +39,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
   );
 
   return (
-    <FormContainer>
+    <Fragment>
       <TextField
         onChange={changeEmailValue}
         sx={{ mb: 2 }}
@@ -55,6 +58,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.password}
       />
       <Button
+        position='center'
         disabled={!formValues.email || !formValues.password}
         variant="contained"
         onClick={() => handle(formValues.email, formValues.password)}
@@ -62,17 +66,8 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         {buttonInnerText}
       </Button>
       {renderFooter?.()}
-    </FormContainer>
+    </Fragment>
   );
 };
-
-const FormContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  jusifyContent: 'center',
-  maxWidth: 500,
-  margin: '0 auto',
-}));
 
 export default AuthForm;
