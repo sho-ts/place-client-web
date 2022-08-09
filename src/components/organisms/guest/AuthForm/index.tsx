@@ -22,7 +22,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         email: event.target.value,
       });
     },
-    []
+    [formValues]
   );
 
   const changePasswordValue = useCallback(
@@ -32,7 +32,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         password: event.target.value,
       });
     },
-    []
+    [formValues]
   );
 
   return (
@@ -46,7 +46,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.email}
       />
       <TextField
-        type='password'
+        type="password"
         onChange={changePasswordValue}
         sx={{ mb: 2 }}
         fullWidth
@@ -55,6 +55,7 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.password}
       />
       <Button
+        disabled={!formValues.email || !formValues.password}
         variant="contained"
         onClick={() => handle(formValues.email, formValues.password)}
       >
