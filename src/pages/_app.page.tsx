@@ -1,15 +1,11 @@
 import type { AppProps } from 'next/app';
-
-import 'the-new-css-reset';
-import styles from '@/styles/global.style';
-
 import { Fragment } from 'react';
-import { Global } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
-      <Global styles={styles} />
+      <CssBaseline />
       <Component {...pageProps} />
     </Fragment>
   );
