@@ -14,19 +14,25 @@ const Header: FC = () => {
     <BottomNavigation>
       <BottomNavigationAction
         onClick={() => router.push('/home')}
-        icon={<Home />}
+        icon={<Home sx={styles.icon} />}
       />
       <BottomNavigationAction
         onClick={() => router.push('/explore')}
-        icon={<Search />}
+        icon={<Search sx={styles.icon} />}
       />
       <BottomNavigationAction
         onClick={() => router.push('/post/compose')}
-        icon={<AddBox />}
+        icon={<AddBox sx={styles.icon} />}
       />
-      <BottomNavigationAction icon={<Person />} />
+      <BottomNavigationAction icon={<Person sx={styles.icon} />} />
     </BottomNavigation>
   );
+};
+
+const styles = {
+  icon: {
+    color: '#333',
+  },
 };
 
 const BottomNavigation = styled(MUIBottomNavi)(({ theme }) => ({
