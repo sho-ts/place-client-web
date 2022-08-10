@@ -30,11 +30,9 @@ const Layout: FC<Props> = ({ children, auth }) => {
       ) : (
         <Fragment>{children}</Fragment>
       )}
-      {user.isLogin ? (
-        <BottomNavi />
-      ) : (
-        omitRoutes.includes(router.pathname) || <GuestBottomNavi />
-      )}
+      {user.isLogin
+        ? !matches && <BottomNavi />
+        : omitRoutes.includes(router.pathname) || <GuestBottomNavi />}
     </Fragment>
   );
 };
