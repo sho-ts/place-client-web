@@ -26,8 +26,10 @@ const AppBar = styled(MUIAppBar)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-const AppLogo = styled(Typography)(({ theme }) => ({
+const AppLogo = styled(Typography)(() => ({
   margin: '0 auto',
+  display: 'flex',
+  alignItems: 'center',
   '@media screen and (min-width: 600px)': {
     margin: 0,
   },
