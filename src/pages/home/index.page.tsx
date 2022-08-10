@@ -2,9 +2,10 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
 import { HomeHeader } from '@/components/organisms/home';
 import { PostsGrid } from '@/components/organisms/post';
-import { Layout } from '@/components/templates';
+import { Layout, Container } from '@/components/templates';
+import { Fragment } from 'react';
 
-const dummyDatas = [...Array(10)].map((_, index) => ({
+const dummyPosts = [...Array(10)].map((_, index) => ({
   postId: `${index}`,
   author: {
     authId: 'auth|xxxx',
@@ -18,14 +19,14 @@ const dummyDatas = [...Array(10)].map((_, index) => ({
 }));
 
 const HomePage: NextPageWithLayout = () => {
-  return <PostsGrid posts={dummyDatas} />;
+  return (
+    <Fragment>
+      <HomeHeader />
+      <Container><PostsGrid posts={dummyPosts} /></Container>
+    </Fragment>
+  );
 };
 
-HomePage.getLayout = (page: ReactElement) => (
-  <Layout auth>
-    <HomeHeader />
-    {page}
-  </Layout>
-);
+HomePage.getLayout = (page: ReactElement) => <Layout auth>{page}</Layout>;
 
 export default HomePage;

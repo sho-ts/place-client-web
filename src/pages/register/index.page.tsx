@@ -4,7 +4,7 @@ import { AuthService } from '@/services';
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { AuthForm } from '@/components/organisms/guest';
-import { Layout } from '@/components/templates';
+import { Layout, Container } from '@/components/templates';
 
 const RegisterPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -22,11 +22,13 @@ const RegisterPage: NextPageWithLayout = () => {
     []
   );
 
-  return <AuthForm handle={handleRegister} buttonInnerText="新規登録" />;
+  return (
+    <Container maxW="sm">
+      <AuthForm handle={handleRegister} buttonInnerText="新規登録" />
+    </Container>
+  );
 };
 
-RegisterPage.getLayout = (page: ReactElement) => (
-  <Layout maxW="sm">{page}</Layout>
-);
+RegisterPage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
 
 export default RegisterPage;

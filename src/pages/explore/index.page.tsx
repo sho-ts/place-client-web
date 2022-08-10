@@ -2,7 +2,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
 import { ExploreHeader } from '@/components/organisms/exploer';
 import { PostsGrid } from '@/components/organisms/post';
-import { Layout } from '@/components/templates';
+import { Layout, Container } from '@/components/templates';
 import { Fragment } from 'react';
 
 const dummyPosts = [...Array(10)].map((_, index) => ({
@@ -18,33 +18,17 @@ const dummyPosts = [...Array(10)].map((_, index) => ({
   createdAt: '2011-11-11 11:11',
 }));
 
-const dummyTags = [
-  '大阪城',
-  '琵琶湖',
-  'カフェ',
-  '家',
-  '静岡県',
-  '山',
-  '淀川',
-  '大阪城',
-  '琵琶湖',
-  'カフェ',
-  '淀川',
-];
-
 const ExplorePage: NextPageWithLayout = () => {
   return (
     <Fragment>
-      <PostsGrid posts={dummyPosts} />
+      <ExploreHeader />
+      <Container>
+        <PostsGrid posts={dummyPosts} />
+      </Container>
     </Fragment>
   );
 };
 
-ExplorePage.getLayout = (page: ReactElement) => (
-  <Layout>
-    <ExploreHeader />
-    {page}
-  </Layout>
-);
+ExplorePage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
 
 export default ExplorePage;
