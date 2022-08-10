@@ -16,7 +16,7 @@ type Props = {
 
 const omitRoutes = ['/login', '/register'];
 
-const Layout: FC<Props> = ({ children, maxW, auth }) => {
+const Layout: FC<Props> = ({ children, maxW = 'md', auth }) => {
   const [user] = useUserState();
   const router = useRouter();
 
