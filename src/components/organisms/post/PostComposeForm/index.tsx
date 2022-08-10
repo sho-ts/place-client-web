@@ -2,17 +2,24 @@ import type { FC, ChangeEventHandler } from 'react';
 import { css } from '@emotion/react';
 import { useRef, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { Button } from '@/components/atoms';
+import { MobileTypographyHeader } from '@/components/molecules';
+import { Container } from '@/components/templates';
 import { IconButton, TextField, Box, styled } from '@mui/material';
 import { AddCircleOutline } from '@mui/icons-material';
 import { Fragment } from 'react';
 
 const PostComposeForm: FC = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('lg'));
   const router = useRouter();
   const ref = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [objectUrl, setObjectUrl] = useState<string>('');
   const [caption, setCaption] = useState<string>('');
+  const [areaKeyword, setAreaKeyword] = useState<string>('');
 
   const handleOnClick = useCallback(() => {
     ref.current?.click();
@@ -39,44 +46,70 @@ const PostComposeForm: FC = () => {
 
   return (
     <Fragment>
-      <Fields>
-        <input onChange={handleUpload} type="file" hidden ref={ref} />
-        {!file ? (
-          <Fragment>
-            <IconButton sx={{ mr: 1 }} onClick={handleOnClick} size="large">
-              <AddCircleOutline fontSize="inherit" />
-            </IconButton>
-          </Fragment>
-        ) : (
-          <div css={styles.thubmnail.base}>
-            <div
-              onClick={handleOnClick}
-              css={styles.thubmnail.inner}
-              style={{
-                backgroundImage: `url(${objectUrl})`,
-              }}
-            />
-          </div>
+      <MobileTypographyHeader
+        renderRight={() => (
+          <Button
+            size="small"
+            onClick={handleSubmit}
+            disabled={!file}
+            variant="contained"
+          >
+            投稿
+          </Button>
         )}
+      >
+        新規投稿
+      </MobileTypographyHeader>
+      <Container maxW="sm">
+        <Fields>
+          <input onChange={handleUpload} type="file" hidden ref={ref} />
+          {!file ? (
+            <Fragment>
+              <IconButton sx={{ mr: 1 }} onClick={handleOnClick} size="large">
+                <AddCircleOutline fontSize="inherit" />
+              </IconButton>
+            </Fragment>
+          ) : (
+            <div css={styles.thubmnail.base}>
+              <div
+                onClick={handleOnClick}
+                css={styles.thubmnail.inner}
+                style={{
+                  backgroundImage: `url(${objectUrl})`,
+                }}
+              />
+            </div>
+          )}
+          <TextField
+            multiline
+            rows={3}
+            fullWidth
+            label="キャプション"
+            variant="filled"
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+          />
+        </Fields>
         <TextField
-          multiline
-          rows={3}
           sx={{ mb: 2 }}
           fullWidth
-          label="キャプション"
+          label="場所を検索"
           variant="filled"
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
+          value={areaKeyword}
+          onChange={(e) => setAreaKeyword(e.target.value)}
         />
-      </Fields>
-      <Button
-        position="right"
-        onClick={handleSubmit}
-        disabled={!file}
-        variant="contained"
-      >
-        投稿
-      </Button>
+        {matches && (
+          <Button
+            size='large'
+            position="center"
+            onClick={handleSubmit}
+            disabled={!file}
+            variant="contained"
+          >
+            投稿
+          </Button>
+        )}
+      </Container>
     </Fragment>
   );
 };
@@ -84,6 +117,7 @@ const PostComposeForm: FC = () => {
 const Fields = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'flex-start',
+  marginBottom: 16,
 }));
 
 const styles = {
