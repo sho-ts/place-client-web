@@ -4,7 +4,7 @@ import { AuthService } from '@/services';
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { AuthForm } from '@/components/organisms/guest';
-import { Layout, Container } from '@/components/templates';
+import { Container } from '@/components/templates';
 
 const LoginPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -19,13 +19,11 @@ const LoginPage: NextPageWithLayout = () => {
     }
   }, []);
 
-  return (
-    <Container maxW="sm">
-      <AuthForm handle={handleLogin} buttonInnerText="ログイン" />
-    </Container>
-  );
+  return <AuthForm handle={handleLogin} buttonInnerText="ログイン" />;
 };
 
-LoginPage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+LoginPage.getLayout = (page: ReactElement) => (
+  <Container maxW="sm">{page}</Container>
+);
 
 export default LoginPage;

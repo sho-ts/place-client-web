@@ -2,8 +2,8 @@ import type { FC, ChangeEvent } from 'react';
 
 import { useState, useCallback } from 'react';
 
-import { TextField } from '@mui/material';
-import { Button } from '@/components/atoms'
+import { TextField, Box, styled } from '@mui/material';
+import { Button, Logo } from '@/components/atoms';
 import { Fragment } from 'react';
 
 type Props = {
@@ -40,6 +40,9 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
 
   return (
     <Fragment>
+      <Header>
+        <Logo />
+      </Header>
       <TextField
         onChange={changeEmailValue}
         sx={{ mb: 2 }}
@@ -58,7 +61,8 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.password}
       />
       <Button
-        position='center'
+        size='large'
+        position="center"
         disabled={!formValues.email || !formValues.password}
         variant="contained"
         onClick={() => handle(formValues.email, formValues.password)}
@@ -69,5 +73,13 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
     </Fragment>
   );
 };
+
+const Header = styled(Box)(() => ({
+  width: 300,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '0 auto 40px',
+}));
 
 export default AuthForm;
