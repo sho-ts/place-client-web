@@ -5,12 +5,15 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import Image from 'next/image';
 
 const Header: FC = () => {
   return (
     <AppBar>
       <Toolbar>
-        <AppName>PLACE</AppName>
+        <AppLogo>
+          <Image width={117} height={29} src="/logo.png" />
+        </AppLogo>
       </Toolbar>
     </AppBar>
   );
@@ -23,8 +26,11 @@ const AppBar = styled(MUIAppBar)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-const AppName = styled(Typography)(({ theme }) => ({
-  fontSize: 20,
+const AppLogo = styled(Typography)(({ theme }) => ({
+  margin: '0 auto',
+  '@media screen and (min-width: 600px)': {
+    margin: 0,
+  },
 }));
 
 export default Header;
