@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   try {
     if (!postId || typeof postId === 'object') {
-      throw new Error('ユーザーIDが不正です');
+      throw new Error('投稿IDが不正です');
     }
 
     const post = await getPost(postId);
