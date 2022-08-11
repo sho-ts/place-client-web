@@ -3,6 +3,7 @@ import type { Post } from '@/types/post';
 import { Box, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   posts: Post[];
@@ -14,7 +15,11 @@ const PostsGrid: FC<Props> = ({ posts }) => {
       {posts.map(({ postId, images }) => (
         <Grid key={postId} xs={6} md={4}>
           <Item>
-            <Image src={images[0]} layout="fill" objectFit="cover" />
+            <Link href={`/post/${postId}`}>
+              <a>
+                <Image src={images[0]} layout="fill" objectFit="cover" />
+              </a>
+            </Link>
           </Item>
         </Grid>
       ))}
@@ -22,7 +27,7 @@ const PostsGrid: FC<Props> = ({ posts }) => {
   );
 };
 
-const Item = styled(Box)(({ theme }) => ({
+const Item = styled(Box)(() => ({
   position: 'relative',
   paddingTop: '120%',
 }));
