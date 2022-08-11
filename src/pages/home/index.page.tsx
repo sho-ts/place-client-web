@@ -13,7 +13,7 @@ const dummyPosts = [...Array(10)].map((_, index) => ({
     name: 'dummy',
     avatar: 'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
   },
-  content: 'dummy',
+  caption: 'dummy',
   images: ['https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60'],
   createdAt: '2011-11-11 11:11',
 }));
