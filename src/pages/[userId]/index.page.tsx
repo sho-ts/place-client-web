@@ -29,11 +29,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       throw new Error('ユーザーIDが不正です');
     }
 
-    const user = await getUser(userId);
+    const response = await getUser(userId);
 
     return {
       props: {
-        user,
+        user: response.data,
       },
     };
   } catch (error) {
