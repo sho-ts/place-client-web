@@ -1,20 +1,20 @@
 import type { FC, ChangeEvent } from 'react';
 
+import { AuthService } from '@/services';
 import { useState, useCallback } from 'react';
+import { useRouter } from 'next/router';
 
 import { TextField, Box, styled } from '@mui/material';
 import { Button, Logo } from '@/components/atoms';
 import { Fragment } from 'react';
 
-type Props = {
-  handle: (email: string, password: string) => void;
-  buttonInnerText: string;
-  renderFooter?: () => JSX.Element;
-};
+const RegisterForm: FC = () => {
+  const router = useRouter();
 
-const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
   const [formValues, setFormValues] = useState({
     email: '',
+    userId: '',
+    name: '',
     password: '',
   });
 
@@ -38,11 +38,57 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
     [formValues]
   );
 
+  const changeNameValue = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFormValues({
+        ...formValues,
+        name: event.target.value,
+      });
+    },
+    [formValues]
+  );
+
+  const changeUserIdValue = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFormValues({
+        ...formValues,
+        userId: event.target.value,
+      });
+    },
+    [formValues]
+  );
+
+  const handleRegister = useCallback(async () => {
+    const authService = new AuthService();
+    try {
+      await authService.register(formValues.email, formValues.password);
+      router.push('/login');
+    } catch (error) {
+      alert('新規登録に失敗しました');
+    }
+  }, []);
+
   return (
     <Fragment>
       <Header>
         <Logo />
       </Header>
+      <TextField
+        onChange={changeUserIdValue}
+        sx={{ mb: 2 }}
+        fullWidth
+        label="ユーザーID"
+        variant="filled"
+        value={formValues.userId}
+      />
+      <TextField
+        onChange={changeNameValue}
+        sx={{ mb: 2 }}
+        fullWidth
+        label="ニックネーム"
+        variant="filled"
+        value={formValues.name}
+      />
       <TextField
         onChange={changeEmailValue}
         sx={{ mb: 2 }}
@@ -61,15 +107,14 @@ const AuthForm: FC<Props> = ({ handle, buttonInnerText, renderFooter }) => {
         value={formValues.password}
       />
       <Button
-        size='large'
+        size="large"
         position="center"
         disabled={!formValues.email || !formValues.password}
         variant="contained"
-        onClick={() => handle(formValues.email, formValues.password)}
+        onClick={handleRegister}
       >
-        {buttonInnerText}
+        新規登録
       </Button>
-      {renderFooter?.()}
     </Fragment>
   );
 };
@@ -82,4 +127,4 @@ const Header = styled(Box)(() => ({
   margin: '0 auto 40px',
 }));
 
-export default AuthForm;
+export default RegisterForm;
