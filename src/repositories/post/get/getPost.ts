@@ -14,7 +14,7 @@ const getPost = async (postId: string): Promise<Post> => {
       postId,
       author,
       images: ['https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60'],
-      content: 'テスト',
+      caption: 'テスト',
       createdAt: '2022-01-01 00:00:00',
     });
   });
