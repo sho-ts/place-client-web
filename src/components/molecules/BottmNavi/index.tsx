@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
+import { useUserState } from '@/states';
 import {
   BottomNavigation as MUIBottomNavi,
   BottomNavigationAction,
@@ -9,6 +10,7 @@ import { Home, Search, Person, AddBox } from '@mui/icons-material';
 
 const Header: FC = () => {
   const router = useRouter();
+  const [user] = useUserState();
 
   return (
     <BottomNavigation>
@@ -24,7 +26,10 @@ const Header: FC = () => {
         onClick={() => router.push('/post/compose')}
         icon={<AddBox sx={styles.icon} />}
       />
-      <BottomNavigationAction icon={<Person sx={styles.icon} />} />
+      <BottomNavigationAction
+        onClick={() => router.push(`/${user.userId}`)}
+        icon={<Person sx={styles.icon} />}
+      />
     </BottomNavigation>
   );
 };

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { usePostSearch } from '@/hooks';
+import { useUserState } from '@/states';
 import {
   AppBar as MUIAppBar,
   Toolbar as MUIToolbar,
@@ -14,6 +15,7 @@ import { Logo } from '@/components/atoms';
 
 const PCHeader: FC = () => {
   const router = useRouter();
+  const [user] = useUserState();
   const { keyword, handleSubmit, changeKeywordValue } = usePostSearch();
 
   return (
@@ -43,7 +45,7 @@ const PCHeader: FC = () => {
           <IconButton onClick={() => router.push('/post/compose')}>
             <AddBox sx={styles.icon} />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => router.push(`/${user.userId}`)}>
             <Person sx={styles.icon} />
           </IconButton>
         </Icons>
