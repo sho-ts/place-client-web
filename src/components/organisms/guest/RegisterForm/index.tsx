@@ -66,7 +66,7 @@ const RegisterForm: FC = () => {
     } catch (error) {
       alert('新規登録に失敗しました');
     }
-  }, []);
+  }, [formValues]);
 
   return (
     <Fragment>

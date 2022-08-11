@@ -44,7 +44,7 @@ const LoginForm: FC = () => {
     } catch (error) {
       alert('ログインに失敗しました');
     }
-  }, []);
+  }, [formValues]);
 
   return (
     <Fragment>
