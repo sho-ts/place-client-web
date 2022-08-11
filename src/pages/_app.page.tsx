@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { CssBaseline } from '@mui/material';
 import { RecoilRoot } from 'recoil';
 import { AuthProvider } from '@/providers';
+import 'destyle.css';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
