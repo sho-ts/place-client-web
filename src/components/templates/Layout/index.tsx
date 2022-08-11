@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { Fragment } from 'react';
 import { PCHeader, BottomNavi } from '@/components/molecules';
 import { GuestBottomNavi } from '@/components/organisms/guest';
-import { AuthProvider } from '@/providers';
+import { AuthGuardProvider } from '@/providers';
 
 type Props = {
   children?: ReactNode;
@@ -26,7 +26,7 @@ const Layout: FC<Props> = ({ children, auth }) => {
     <Fragment>
       {matches && <PCHeader />}
       {auth ? (
-        <AuthProvider>{children}</AuthProvider>
+        <AuthGuardProvider>{children}</AuthGuardProvider>
       ) : (
         <Fragment>{children}</Fragment>
       )}

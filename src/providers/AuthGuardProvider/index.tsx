@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
 import { AuthService } from '@/services';
 import { Fragment } from 'react';
@@ -10,13 +11,13 @@ type Props = {
   children?: ReactNode;
 };
 
-const AuthProvider: FC<Props> = ({ children }) => {
+const AuthGuardProvider: FC<Props> = ({ children }) => {
+  const router = useRouter();
   const isMounted = useRef(false);
-  const [checked, setChecked] = useState(false);
   const [user, setUser] = useUserState();
 
   useEffect(() => {
-    if (isMounted.current) return;
+    if (isMounted.current || user.isLogin) return;
 
     authService
       .getCurrentUser()
@@ -27,22 +28,15 @@ const AuthProvider: FC<Props> = ({ children }) => {
         });
       })
       .catch(() => {
-        setUser({
-          ...user,
-          isLogin: false,
-        });
+        router.push('/login');
       })
       .finally(() => {
-        setChecked(true);
         isMounted.current = true;
       });
   }, []);
 
-  if (checked) {
-    return <Fragment>{children}</Fragment>;
-  }
-
+  if (user.isLogin) return <Fragment>{children}</Fragment>;
   return <Fragment />;
 };
 
-export default AuthProvider;
+export default AuthGuardProvider;
