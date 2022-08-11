@@ -6,7 +6,7 @@ const getUser = async (userId: string): Promise<User> => {
       authId: 'auth|xxxx',
       userId,
       name: 'ダミーユーザー',
-      avatar: '',
+      avatar: 'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
     });
   });
 };
