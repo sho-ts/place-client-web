@@ -27,8 +27,8 @@ const AuthProvider: FC<Props> = ({ children }) => {
           const response = await getMe();
 
           setUser({
-            user: response.data,
             isLogin: true,
+            ...response.data,
           });
         } catch (error) {
           throw new Error('ユーザー情報の取得に失敗');
