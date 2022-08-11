@@ -4,6 +4,6 @@ export type Post = {
   postId: string;
   author: User;
   images: string[];
-  content: string;
+  caption: string;
   createdAt: string;
 };
