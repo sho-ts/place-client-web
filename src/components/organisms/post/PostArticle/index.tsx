@@ -1,13 +1,12 @@
 import type { FC } from 'react';
 import type { Post } from '@/types/post';
-import { PostAuthor, PostAuthorName } from '@/components/organisms/post';
 import {
-  Box,
-  Container as MUIContainer,
-  IconButton,
-  styled,
-} from '@mui/material';
-import { FavoriteBorder, ChatBubbleOutlineOutlined } from '@mui/icons-material';
+  PostAuthor,
+  PostCaption,
+  PostCreatedAt,
+  PostIconButtons,
+} from '@/components/organisms/post';
+import { Box, Container as MUIContainer, styled } from '@mui/material';
 import Image from 'next/image';
 
 type Props = {
@@ -26,19 +25,9 @@ const PostArticle: FC<Props> = ({ post }) => {
         </ImageInner>
       </ImageWrapper>
       <Container>
-        <Box sx={{ mb: 1 }}>
-          <IconButton>
-            <FavoriteBorder sx={{ color: '#333' }} />
-          </IconButton>
-          <IconButton>
-            <ChatBubbleOutlineOutlined sx={{ color: '#333' }} />
-          </IconButton>
-        </Box>
-        <Box>
-          <PostAuthorName sx={{ mr: 1 }} author={post.author} />
-          <Content>{post.content}</Content>
-        </Box>
-        <CreatedAt sx={{ mt: 1 }}>{post.createdAt}</CreatedAt>
+        <PostIconButtons post={post} sx={{ mb: 1 }} />
+        <PostCaption post={post} />
+        <PostCreatedAt post={post} sx={{ mt: 1 }} />
       </Container>
     </Base>
   );
@@ -68,17 +57,6 @@ const ImageWrapper = styled(Box)(() => ({
 const ImageInner = styled(Box)(() => ({
   position: 'relative',
   paddingTop: '140%',
-}));
-
-const Content = styled('p')(() => ({
-  fontSize: 13,
-  display: 'inline',
-  wordBreak: 'break-all',
-}));
-
-const CreatedAt = styled('p')(({ theme }) => ({
-  fontSize: 10,
-  color: theme.palette.grey[700],
 }));
 
 export default PostArticle;

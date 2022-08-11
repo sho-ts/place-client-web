@@ -21,7 +21,7 @@ const PostAuthorName: FC<Props> = ({ author, sx }) => {
 
 const Base = styled('p')(() => ({
   fontWeight: 'bold',
-  fontSize: 13,
+  fontSize: 14,
   display: 'inline-block',
 }));
 
