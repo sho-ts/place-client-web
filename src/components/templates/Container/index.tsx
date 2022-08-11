@@ -14,6 +14,9 @@ const Container: FC<Props> = ({ children, maxW = 'md' }) => {
 const Body = styled(MUIContainer)(({ theme }) => ({
   padding: '72px 8px',
   minHeight: '100vh',
+  '@media screen and (min-width: 600px)': {
+    paddingTop: 64 + 16,
+  },
   '@media screen and (min-width: 1200px)': {
     paddingTop: 64 + 24,
   },
