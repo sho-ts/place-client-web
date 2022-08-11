@@ -1,4 +1,6 @@
 import type { FC, ReactNode } from 'react';
+import { defaultState } from '@/states/user/atom';
+import { getMe } from '@/repositories/user/get';
 import { useEffect, useRef, useState } from 'react';
 import { useUserState } from '@/states';
 import { AuthService } from '@/services';
@@ -13,24 +15,27 @@ type Props = {
 const AuthProvider: FC<Props> = ({ children }) => {
   const isMounted = useRef(false);
   const [checked, setChecked] = useState(false);
-  const [user, setUser] = useUserState();
+  const [, setUser] = useUserState();
 
   useEffect(() => {
     if (isMounted.current) return;
 
     authService
       .getCurrentUser()
-      .then(() => {
-        setUser({
-          ...user,
-          isLogin: true,
-        });
+      .then(async () => {
+        try {
+          const response = await getMe();
+
+          setUser({
+            user: response.data,
+            isLogin: true,
+          });
+        } catch (error) {
+          throw new Error('ユーザー情報の取得に失敗');
+        }
       })
       .catch(() => {
-        setUser({
-          ...user,
-          isLogin: false,
-        });
+        setUser(defaultState);
       })
       .finally(() => {
         setChecked(true);
