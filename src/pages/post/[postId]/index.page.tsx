@@ -4,7 +4,8 @@ import type { Post } from '@/types/post';
 import type { ReactElement } from 'react';
 import { getPost } from '@/repositories/post/get';
 import { MobileTypographyHeader } from '@/components/molecules';
-import { Layout, Container } from '@/components/templates';
+import { PostArticle } from '@/components/organisms/post';
+import { Layout } from '@/components/templates';
 import { Fragment } from 'react';
 
 type Props = {
@@ -15,7 +16,7 @@ const PostPage: NextPageWithLayout<Props> = ({ post }) => {
   return (
     <Fragment>
       <MobileTypographyHeader>投稿</MobileTypographyHeader>
-      <Container></Container>
+      <PostArticle post={post} />
     </Fragment>
   );
 };
