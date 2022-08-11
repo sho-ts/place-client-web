@@ -11,10 +11,10 @@ type Props = {
 const PostsGrid: FC<Props> = ({ posts }) => {
   return (
     <Grid container spacing={1}>
-      {posts.map(({ postId, imageUrl }) => (
+      {posts.map(({ postId, images }) => (
         <Grid key={postId} xs={6} md={4}>
           <Item>
-            <Image src={imageUrl} layout="fill" objectFit="cover" />
+            <Image src={images[0]} layout="fill" objectFit="cover" />
           </Item>
         </Grid>
       ))}
