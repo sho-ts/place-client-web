@@ -17,7 +17,7 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
   return (
     <Base>
       <Container>
-        <PostAuthor sx={{ py: 2 }} author={post.author} />
+        <PostAuthor sx={{ py: 2 }} user={post.user} />
       </Container>
       <ImageWrapper>
         <ImageInner>

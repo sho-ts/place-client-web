@@ -5,15 +5,15 @@ import { styled } from '@mui/material';
 import Link from 'next/link';
 
 type Props = {
-  author: User;
+  user: User;
   sx?: SxProps;
 };
 
-const PostAuthorName: FC<Props> = ({ author, sx }) => {
+const PostAuthorName: FC<Props> = ({ user, sx }) => {
   return (
     <Base sx={sx}>
-      <Link href={`/${author.userId}`}>
-        <a>{author.userId}</a>
+      <Link href={`/${user.userId}`}>
+        <a>{user.userId}</a>
       </Link>
     </Base>
   );

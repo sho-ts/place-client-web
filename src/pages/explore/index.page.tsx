@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 
 const dummyPosts = [...Array(10)].map((_, index) => ({
   postId: `${index}`,
-  author: {
+  user: {
     authId: 'auth|xxxx',
     userId: 'dummy',
     name: 'dummy',

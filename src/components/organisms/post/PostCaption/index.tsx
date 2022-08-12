@@ -12,7 +12,7 @@ type Props = {
 const PostCaption: FC<Props> = ({ post, sx }) => {
   return (
     <Box sx={sx}>
-      <PostAuthorName author={post.author} />
+      <PostAuthorName user={post.user} />
       <Caption sx={{ ml: 1 }}>{post.caption}</Caption>
     </Box>
   );

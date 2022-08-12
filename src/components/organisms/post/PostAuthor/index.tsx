@@ -5,15 +5,15 @@ import { Avatar, Box, styled } from '@mui/material';
 import { PostAuthorName } from '@/components/organisms/post';
 
 type Props = {
-  author: User;
+  user: User;
   sx?: SxProps;
 };
 
-const PostAuthor: FC<Props> = ({ author, sx }) => {
+const PostAuthor: FC<Props> = ({ user, sx }) => {
   return (
     <Base sx={sx}>
-      <Avatar alt={author.name} src={author.avatar} />
-      <PostAuthorName sx={{ ml: 2 }} author={author} />
+      <Avatar alt={user.name} src={user.avatar} />
+      <PostAuthorName sx={{ ml: 2 }} user={user} />
     </Base>
   );
 };
