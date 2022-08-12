@@ -4,12 +4,12 @@ import type { SxProps } from '@mui/system/styleFunctionSx';
 import { styled } from '@mui/material';
 
 type Props = {
-  post: Post;
+  createdAt: string;
   sx?: SxProps;
 };
 
-const PostCreatedAt: FC<Props> = ({ post, sx }) => {
-  return <Base sx={sx}>{post.createdAt}</Base>;
+const PostCreatedAt: FC<Props> = ({ createdAt, sx }) => {
+  return <Base sx={sx}>{createdAt}</Base>;
 };
 
 const Base = styled('p')(({ theme }) => ({

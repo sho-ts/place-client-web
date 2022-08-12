@@ -20,14 +20,12 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
         <PostAuthor sx={{ py: 2 }} user={post.user} />
       </Container>
       <ImageWrapper>
-        <ImageInner>
-          <Image src={post.images[0]} layout="fill" objectFit="cover" />
-        </ImageInner>
+        <Image src={post.images[0]} layout="fill" objectFit="cover" />
       </ImageWrapper>
       <Container>
         <PostIconButtons post={post} sx={{ mb: 1 }} />
         <PostCaption post={post} />
-        <PostCreatedAt post={post} sx={{ mt: 1 }} />
+        <PostCreatedAt createdAt={post.createdAt} sx={{ mt: 1 }} />
       </Container>
     </Base>
   );
@@ -49,12 +47,7 @@ const Container = styled(Box)(() => ({
 }));
 
 const ImageWrapper = styled(Box)(() => ({
-  maxWidth: 562,
-  maxHeight: 767,
   margin: '0 auto 8px',
-}));
-
-const ImageInner = styled(Box)(() => ({
   position: 'relative',
   paddingTop: '140%',
 }));

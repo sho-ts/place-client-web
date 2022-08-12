@@ -3,6 +3,7 @@ export { default as PostArticlePC } from './PostArticlePC';
 export { default as PostAuthor } from './PostAuthor';
 export { default as PostAuthorName } from './PostAuthorName';
 export { default as PostCaption } from './PostCaption';
+export { default as PostComment } from './PostComment';
 export { default as PostComposeForm } from './PostComposeForm';
 export { default as PostCreatedAt } from './PostCreatedAt';
 export { default as PostIconButtons } from './PostIconButtons';
