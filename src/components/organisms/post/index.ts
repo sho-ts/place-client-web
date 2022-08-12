@@ -1,4 +1,5 @@
-export { default as PostArticle } from './PostArticle';
+export { default as PostArticleMobile } from './PostArticleMobile';
+export { default as PostArticlePC } from './PostArticlePC';
 export { default as PostAuthor } from './PostAuthor';
 export { default as PostAuthorName } from './PostAuthorName';
 export { default as PostCaption } from './PostCaption';

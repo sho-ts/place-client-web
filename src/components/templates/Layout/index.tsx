@@ -5,7 +5,7 @@ import { useUserState } from '@/states';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Fragment } from 'react';
-import { PCHeader, BottomNavi } from '@/components/molecules';
+import { HeaderPC, BottomNavi } from '@/components/molecules';
 import { GuestBottomNavi } from '@/components/organisms/guest';
 import { AuthGuardProvider } from '@/providers';
 
@@ -24,7 +24,7 @@ const Layout: FC<Props> = ({ children, auth }) => {
 
   return (
     <Fragment>
-      {matches && <PCHeader />}
+      {matches && <HeaderPC />}
       {auth ? (
         <AuthGuardProvider>{children}</AuthGuardProvider>
       ) : (

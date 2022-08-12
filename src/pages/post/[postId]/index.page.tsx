@@ -3,8 +3,8 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { Post } from '@/types/post';
 import type { ReactElement } from 'react';
 import { getPost } from '@/repositories/post/get';
-import { MobileTypographyHeader } from '@/components/molecules';
-import { PostArticle } from '@/components/organisms/post';
+import { TypographyHeader } from '@/components/molecules';
+import { PostArticleMobile } from '@/components/organisms/post';
 import { Layout } from '@/components/templates';
 import { Fragment } from 'react';
 
@@ -15,8 +15,7 @@ type Props = {
 const PostPage: NextPageWithLayout<Props> = ({ post }) => {
   return (
     <Fragment>
-      <MobileTypographyHeader>投稿</MobileTypographyHeader>
-      <PostArticle post={post} />
+      <TypographyHeader>投稿</TypographyHeader>
     </Fragment>
   );
 };

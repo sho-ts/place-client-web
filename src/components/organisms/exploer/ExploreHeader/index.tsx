@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 import { usePostSearch } from '@/hooks';
 import { TextField } from '@mui/material';
-import { MobileBaseHeader } from '@/components/molecules';
+import { BaseHeaderMobile } from '@/components/molecules';
 
 const ExploerHeader: FC = () => {
   const { keyword, handleSubmit, changeKeywordValue } = usePostSearch();
 
   return (
-    <MobileBaseHeader>
+    <BaseHeaderMobile>
       <form onSubmit={handleSubmit} style={{ width: '100%' }}>
         <TextField
           onChange={changeKeywordValue}
@@ -18,7 +18,7 @@ const ExploerHeader: FC = () => {
           value={keyword}
         />
       </form>
-    </MobileBaseHeader>
+    </BaseHeaderMobile>
   );
 };
 

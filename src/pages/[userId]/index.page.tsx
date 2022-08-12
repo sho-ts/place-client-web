@@ -3,7 +3,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { User } from '@/types/user';
 import type { ReactElement } from 'react';
 import { getUser } from '@/repositories/user/get';
-import { MobileTypographyHeader } from '@/components/molecules';
+import { TypographyHeader } from '@/components/molecules';
 import { Layout } from '@/components/templates';
 import { Fragment } from 'react';
 
@@ -14,7 +14,7 @@ type Props = {
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
   return (
     <Fragment>
-      <MobileTypographyHeader>{user.userId}</MobileTypographyHeader>
+      <TypographyHeader>{user.userId}</TypographyHeader>
     </Fragment>
   );
 };

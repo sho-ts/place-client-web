@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import { Logo } from '@/components/atoms';
-import { MobileBaseHeader } from '@/components/molecules';
+import { BaseHeaderMobile } from '@/components/molecules';
 
 const HomeHeader: FC = () => {
   return (
-    <MobileBaseHeader>
+    <BaseHeaderMobile>
       <div
         style={{
           display: 'flex',
@@ -14,7 +14,7 @@ const HomeHeader: FC = () => {
       >
         <Logo />
       </div>
-    </MobileBaseHeader>
+    </BaseHeaderMobile>
   );
 };
 

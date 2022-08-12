@@ -8,7 +8,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const MobileBaseHeader: FC<Props> = ({ children }) => {
+const BaseHeaderMobile: FC<Props> = ({ children }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -28,4 +28,4 @@ const AppBar = styled(MUIAppBar)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-export default MobileBaseHeader;
+export default BaseHeaderMobile;

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Button } from '@/components/atoms';
-import { MobileTypographyHeader } from '@/components/molecules';
+import { TypographyHeader } from '@/components/molecules';
 import { Container } from '@/components/templates';
 import { IconButton, TextField, Box, styled } from '@mui/material';
 import { AddCircleOutline } from '@mui/icons-material';
@@ -46,7 +46,7 @@ const PostComposeForm: FC = () => {
 
   return (
     <Fragment>
-      <MobileTypographyHeader
+      <TypographyHeader
         renderRight={() => (
           <Button
             size="small"
@@ -59,7 +59,7 @@ const PostComposeForm: FC = () => {
         )}
       >
         新規投稿
-      </MobileTypographyHeader>
+      </TypographyHeader>
       <Container maxW="sm">
         <Fields>
           <input onChange={handleUpload} type="file" hidden ref={ref} />

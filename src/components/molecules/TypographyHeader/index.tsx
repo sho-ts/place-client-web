@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import { Typography as MUITypography, Box, styled } from '@mui/material';
-import { MobileBaseHeader } from '@/components/molecules';
+import { BaseHeaderMobile } from '@/components/molecules';
 
 type Props = {
   children?: ReactNode;
@@ -8,20 +8,20 @@ type Props = {
   renderLeft?: () => JSX.Element;
 };
 
-const MobileTypographyHeader: FC<Props> = ({
+const TypographyHeader: FC<Props> = ({
   children,
   renderLeft,
   renderRight,
 }) => {
   return (
-    <MobileBaseHeader>
+    <BaseHeaderMobile>
       <Inner>
         {renderLeft?.()}
         <span />
         <Typography>{children}</Typography>
         {renderRight?.()}
       </Inner>
-    </MobileBaseHeader>
+    </BaseHeaderMobile>
   );
 };
 
@@ -42,4 +42,4 @@ const Inner = styled(Box)(() => ({
   width: '100%',
 }));
 
-export default MobileTypographyHeader;
+export default TypographyHeader;

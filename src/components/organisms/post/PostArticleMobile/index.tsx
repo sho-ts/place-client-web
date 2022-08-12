@@ -13,7 +13,7 @@ type Props = {
   post: Post;
 };
 
-const PostArticle: FC<Props> = ({ post }) => {
+const PostArticleMobile: FC<Props> = ({ post }) => {
   return (
     <Base>
       <Container>
@@ -59,4 +59,4 @@ const ImageInner = styled(Box)(() => ({
   paddingTop: '140%',
 }));
 
-export default PostArticle;
+export default PostArticleMobile;
