@@ -5,5 +5,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_IDENTITY_POOL_ID: string;
     NEXT_PUBLIC_USER_POOL_ID: string;
     NEXT_PUBLIC_CLIENT_ID: string;
+    NEXT_PUBLIC_API_URL: string;
   }
 }
