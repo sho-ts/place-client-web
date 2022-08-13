@@ -61,7 +61,12 @@ const RegisterForm: FC = () => {
   const handleRegister = useCallback(async () => {
     const authService = new AuthService();
     try {
-      await authService.register(formValues.email, formValues.password);
+      await authService.register(
+        formValues.name,
+        formValues.userId,
+        formValues.email,
+        formValues.password
+      );
       router.push('/login');
     } catch (error) {
       alert('新規登録に失敗しました');

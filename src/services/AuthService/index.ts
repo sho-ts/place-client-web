@@ -7,6 +7,7 @@ import {
   AuthenticationDetails,
   ISignUpResult,
 } from 'amazon-cognito-identity-js';
+import { createUser } from '@/repositories/user/post';
 
 type LoginResult = {
   idToken: string;
@@ -30,7 +31,7 @@ class AuthService {
     ClientId: process.env.NEXT_PUBLIC_CLIENT_ID,
   });
 
-  register(email: string, password: string) {
+  register(name: string, userId: string, email: string, password: string) {
     const attributes = [
       new CognitoUserAttribute({
         Name: 'email',
@@ -39,6 +40,7 @@ class AuthService {
     ];
 
     return new Promise<ISignUpResult>((resolve, reject) => {
+      // Conitoに認証情報を登録
       this.cognitoUserPoll.signUp(
         email,
         password,
@@ -52,6 +54,13 @@ class AuthService {
           }
         }
       );
+    }).then((result) => {
+      // DBにユーザー情報を登録
+      return createUser({
+        authId: result.userSub,
+        name,
+        userId,
+      });
     });
   }
 
