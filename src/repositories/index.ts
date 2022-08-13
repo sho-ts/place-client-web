@@ -7,9 +7,11 @@ export const getHeaders = async () => {
     const { accessToken } = await authService.getCurrentUser();
 
     return {
-      Authentication: accessToken
+      Authentication: accessToken,
     };
   } catch (error) {
-    return {};
+    return {
+      Authentication: '',
+    };
   }
 };
