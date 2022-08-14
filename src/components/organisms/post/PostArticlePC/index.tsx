@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { Post, Comment } from '@/types/post';
+import { useGetPostCommentSWR } from '@/repositories/comment/swr';
 import {
   PostAuthor,
   PostComment,
@@ -20,6 +21,8 @@ const PostArticlePC: FC<Props> = ({ post }) => {
     createdAt: post.createdAt,
   };
 
+  const { data } = useGetPostCommentSWR(post.postId);
+
   return (
     <Container>
       <PostBox>
@@ -34,6 +37,14 @@ const PostArticlePC: FC<Props> = ({ post }) => {
           </AuthorContainer>
           <CommentContainer>
             <PostComment comment={caption} />
+            {data &&
+              data.map((comment) => (
+                <PostComment
+                  sx={{ mt: 2 }}
+                  key={comment.commentId}
+                  comment={comment}
+                />
+              ))}
           </CommentContainer>
           <IconsContainer>
             <PostIconButtons post={post} />
