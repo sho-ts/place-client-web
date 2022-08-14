@@ -4,7 +4,10 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ['page.tsx'],
   images: {
-    domains: ['images.unsplash.com'],
+    domains: [
+      'images.unsplash.com',
+      process.env.NEXT_PUBLIC_S3_BUCKET
+    ],
   },
 }
 
