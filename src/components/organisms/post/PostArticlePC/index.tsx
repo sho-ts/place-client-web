@@ -70,16 +70,17 @@ const ImageInner = styled(Box)(() => ({
   paddingTop: '140%',
 }));
 
-const PostBox = styled(Box)(() => ({
+const PostBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   margin: '0 auto',
-  border: '1px solid #ccc',
+  border: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-const PostBody = styled(Box)(() => ({
+const PostBody = styled(Box)(({ theme }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  borderLeft: `1px solid ${theme.palette.grey[300]}`,
 }));
 
 const BaseContainer = styled(Box)(({ theme }) => ({
