@@ -9,9 +9,9 @@ type Props = {
   sx?: SxProps;
 };
 
-const PostComment: FC<Props> = ({ comment }) => {
+const PostComment: FC<Props> = ({ comment, sx }) => {
   return (
-    <Base>
+    <Base sx={sx}>
       <AvatarWrapper>
         <Avatar src={comment.user.avatar} />
       </AvatarWrapper>
