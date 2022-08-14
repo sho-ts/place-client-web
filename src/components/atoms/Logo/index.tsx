@@ -2,10 +2,15 @@ import type { FC } from 'react';
 import { Typography, styled } from '@mui/material';
 import Image from 'next/image';
 
-const Logo: FC = () => {
+type Props = {
+  w?: number;
+  h?: number;
+};
+
+const Logo: FC<Props> = ({ w = 117, h = 29 }) => {
   return (
     <AppLogo>
-      <Image width={117} height={29} src="/logo.png" />
+      <Image width={w} height={h} src="/logo.png" alt="" />
     </AppLogo>
   );
 };
