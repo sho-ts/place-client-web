@@ -1,27 +1,18 @@
 import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
+import { useGetPostsSWR } from '@/repositories/post/swr';
 import { HomeHeader } from '@/components/organisms/home';
 import { PostsGrid } from '@/components/organisms/post';
 import { Layout, Container } from '@/components/templates';
 import { Fragment } from 'react';
 
-const dummyPosts = [...Array(10)].map((_, index) => ({
-  postId: `${index}`,
-  user: {
-    userId: 'dummy',
-    name: 'dummy',
-    avatar: 'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
-  },
-  caption: 'dummy',
-  files: ['https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60'],
-  createdAt: '2011-11-11 11:11',
-}));
-
 const HomePage: NextPageWithLayout = () => {
+  const { data } = useGetPostsSWR();
+
   return (
     <Fragment>
       <HomeHeader />
-      <Container><PostsGrid posts={dummyPosts} /></Container>
+      <Container>{data && <PostsGrid posts={data} />}</Container>
     </Fragment>
   );
 };

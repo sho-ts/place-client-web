@@ -1,29 +1,20 @@
 import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
+import { useGetPostsSWR } from '@/repositories/post/swr';
+import { useRouter } from 'next/router';
 import { ExploreHeader } from '@/components/organisms/exploer';
 import { PostsGrid } from '@/components/organisms/post';
 import { Layout, Container } from '@/components/templates';
 import { Fragment } from 'react';
 
-const dummyPosts = [...Array(10)].map((_, index) => ({
-  postId: `${index}`,
-  user: {
-    userId: 'dummy',
-    name: 'dummy',
-    avatar: 'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
-  },
-  caption: 'dummy',
-  files: ['https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60'],
-  createdAt: '2011-11-11 11:11',
-}));
-
 const ExplorePage: NextPageWithLayout = () => {
+  const router = useRouter();
+  const { data } = useGetPostsSWR(router.query.keyword);
+
   return (
     <Fragment>
       <ExploreHeader />
-      <Container>
-        <PostsGrid posts={dummyPosts} />
-      </Container>
+      <Container>{data && <PostsGrid posts={data} />}</Container>
     </Fragment>
   );
 };

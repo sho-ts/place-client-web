@@ -8,6 +8,14 @@ export type Post = {
   createdAt: string;
 };
 
+export type PostsItem = {
+  postId: string;
+  user: User;
+  thumbnail: string;
+  caption: string;
+  createdAt: string;
+};
+
 export type Comment = {
   user: User;
   content: string;
