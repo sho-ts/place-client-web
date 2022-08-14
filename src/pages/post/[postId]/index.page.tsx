@@ -44,11 +44,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       throw new Error('投稿IDが不正です');
     }
 
-    const post = await getPost(postId);
+    const { data } = await getPost(postId);
 
     return {
       props: {
-        post,
+        post: data,
       },
     };
   } catch (error) {
