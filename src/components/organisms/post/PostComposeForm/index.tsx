@@ -4,6 +4,7 @@ import { useRef, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { createPost } from '@/repositories/post/post';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
 import { Container } from '@/components/templates';
@@ -35,9 +36,15 @@ const PostComposeForm: FC = () => {
   };
 
   const handleSubmit = useCallback(async () => {
+    if (!file) return;
+
     try {
-      console.log(file);
-      console.log(caption);
+      const formData = new FormData();
+      formData.append('attachmentFile', file);
+      formData.append('caption', caption ?? '');
+
+      await createPost(formData);
+
       router.push('/home');
     } catch (error) {
       alert('アップロードに失敗しました');
@@ -100,7 +107,7 @@ const PostComposeForm: FC = () => {
         />
         {matches && (
           <Button
-            size='large'
+            size="large"
             position="center"
             onClick={handleSubmit}
             disabled={!file}
