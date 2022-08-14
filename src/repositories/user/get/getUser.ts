@@ -1,17 +1,10 @@
 import type { User } from '@/types/user';
+import axios from 'axios';
 
-const getUser = async (userId: string): Promise<{ data: User }> => {
-  return new Promise<{ data: User }>((resolve) => {
-    resolve({
-      data: {
-        authId: 'auth|xxxx',
-        userId,
-        name: 'ダミーユーザー',
-        avatar:
-          'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
-      },
-    });
-  });
+const getUser = async (userId: string) => {
+  return axios.get<User>(
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/user/${userId}`
+  );
 };
 
 export default getUser;
