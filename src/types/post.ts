@@ -3,7 +3,10 @@ import type { User } from '@/types/user';
 export type Post = {
   postId: string;
   user: User;
-  files: string[];
+  files: {
+    id: string;
+    url: string;
+  }[];
   caption: string;
   createdAt: string;
 };

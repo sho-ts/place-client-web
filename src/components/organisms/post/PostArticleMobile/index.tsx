@@ -20,7 +20,7 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
         <PostAuthor sx={{ py: 2 }} user={post.user} />
       </Container>
       <ImageWrapper>
-        <Image src={post.files[0]} layout="fill" objectFit="cover" />
+        <Image src={post.files[0].url} layout="fill" objectFit="cover" />
       </ImageWrapper>
       <Container>
         <PostIconButtons post={post} sx={{ mb: 1 }} />

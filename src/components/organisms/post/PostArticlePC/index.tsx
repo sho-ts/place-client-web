@@ -25,7 +25,7 @@ const PostArticlePC: FC<Props> = ({ post }) => {
       <PostBox>
         <ImageWrapper>
           <ImageInner>
-            <Image src={post.files[0]} layout="fill" objectFit="cover" />
+            <Image src={post.files[0].url} layout="fill" objectFit="cover" />
           </ImageInner>
         </ImageWrapper>
         <PostBody>
