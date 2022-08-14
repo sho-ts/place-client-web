@@ -7,6 +7,7 @@ export type Post = {
     id: string;
     url: string;
   }[];
+  liked: number;
   caption: string;
   createdAt: string;
 };
