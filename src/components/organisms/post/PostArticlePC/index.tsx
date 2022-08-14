@@ -4,6 +4,7 @@ import { useGetPostCommentSWR } from '@/repositories/comment/swr';
 import {
   PostAuthor,
   PostComment,
+  PostCommentForm,
   PostIconButtons,
 } from '@/components/organisms/post';
 import { Container } from '@/components/templates';
@@ -21,7 +22,7 @@ const PostArticlePC: FC<Props> = ({ post }) => {
     createdAt: post.createdAt,
   };
 
-  const { data } = useGetPostCommentSWR(post.postId);
+  const { data, mutate } = useGetPostCommentSWR(post.postId);
 
   return (
     <Container>
@@ -50,14 +51,7 @@ const PostArticlePC: FC<Props> = ({ post }) => {
             <PostIconButtons post={post} />
           </IconsContainer>
           <AddCommentContainer>
-            <TextField
-              label="コメントを追加..."
-              variant="filled"
-              size="small"
-              fullWidth
-              sx={{ mr: 1 }}
-            />
-            <Button variant="contained">投稿</Button>
+            <PostCommentForm post={post} mutate={mutate} />
           </AddCommentContainer>
         </PostBody>
       </PostBox>
@@ -100,6 +94,7 @@ const AuthorContainer = styled(BaseContainer)(({ theme }) => ({
 const CommentContainer = styled(Box)(({ theme }) => ({
   padding: '1rem',
   height: '100%',
+  maxHeight: '400px',
   overflow: 'scroll',
   flexShrink: 1,
 }));
