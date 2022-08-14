@@ -12,12 +12,12 @@ type Props = {
 const PostsGrid: FC<Props> = ({ posts }) => {
   return (
     <Grid container spacing={1}>
-      {posts.map(({ postId, images }) => (
+      {posts.map(({ postId, files }) => (
         <Grid key={postId} xs={6} md={4}>
           <Item>
             <Link href={`/post/${postId}`}>
               <a>
-                <Image src={images[0]} layout="fill" objectFit="cover" />
+                <Image src={files[0]} layout="fill" objectFit="cover" />
               </a>
             </Link>
           </Item>
