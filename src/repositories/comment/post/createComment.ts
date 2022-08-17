@@ -5,8 +5,8 @@ const createComment = async (postId: string, content: string) => {
   const headers = await getHeaders();
 
   return axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/post/comment`,
-    { postId, content },
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/posts/${postId}/comments`,
+    { content },
     {
       headers,
     }

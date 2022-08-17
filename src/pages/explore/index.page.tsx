@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
-import { useGetPostsSWR } from '@/repositories/post/swr';
+import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import { useRouter } from 'next/router';
 import { ExploreHeader } from '@/components/organisms/exploer';
 import { PostsGrid } from '@/components/organisms/post';
@@ -9,7 +9,7 @@ import { Fragment } from 'react';
 
 const ExplorePage: NextPageWithLayout = () => {
   const router = useRouter();
-  const { data } = useGetPostsSWR(router.query.keyword);
+  const { data } = usePostsFindAllSWR(router.query.keyword);
 
   return (
     <Fragment>

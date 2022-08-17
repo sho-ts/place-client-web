@@ -1,1 +1,1 @@
-export { default as useGetPostsSWR } from './useGetPostsSWR';
+export { default as usePostsFindAllSWR } from './usePostsFindAllSWR';

@@ -1,18 +1,18 @@
 import type { FC } from 'react';
-import type { PostsItem } from '@/types/post';
+import type { PostsFindAllResponse } from '@/types/response/post';
 import { Box, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
-  posts: PostsItem[];
+  posts: PostsFindAllResponse;
 };
 
 const PostsGrid: FC<Props> = ({ posts }) => {
   return (
     <Grid container spacing={1}>
-      {posts.map(({ postId, thumbnail }) => (
+      {posts.items.map(({ postId, thumbnail }) => (
         <Grid key={postId} xs={6} md={4}>
           <Item>
             <Link href={`/post/${postId}`}>

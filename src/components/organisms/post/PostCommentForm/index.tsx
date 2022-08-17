@@ -1,7 +1,7 @@
 import type { FC, ChangeEventHandler } from 'react';
 import type { KeyedMutator } from 'swr';
 import type { Post } from '@/types/post';
-import type { Comment } from '@/types/comment';
+import type { CommentsFindAllResponse } from '@/types/response/comment';
 import { useState, useCallback } from 'react';
 import { createComment } from '@/repositories/comment/post';
 import { Button, TextField } from '@mui/material';
@@ -9,7 +9,7 @@ import { Fragment } from 'react';
 
 type Props = {
   post: Post;
-  mutate: KeyedMutator<Comment[]>;
+  mutate: KeyedMutator<CommentsFindAllResponse>;
 };
 
 const PostCommentForm: FC<Props> = ({ post, mutate }) => {

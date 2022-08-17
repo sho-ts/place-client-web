@@ -11,7 +11,7 @@ type Response = User;
 
 const createUser = async (requestBody: RequestBody) => {
   return axios.post<Response>(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/user`,
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/users`,
     requestBody
   );
 };

@@ -4,7 +4,6 @@ const getMe = async (): Promise<{ data: User }> => {
   return new Promise<{ data: User }>((resolve) => {
     resolve({
       data: {
-        authId: 'auth|xxxx',
         userId: 'dummy',
         name: 'ダミーユーザー',
         avatar:

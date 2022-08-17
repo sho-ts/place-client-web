@@ -39,7 +39,7 @@ const PostArticlePC: FC<Props> = ({ post }) => {
           <CommentContainer>
             <PostComment comment={caption} />
             {data &&
-              data.map((comment) => (
+              data.items.map((comment) => (
                 <PostComment
                   sx={{ mt: 2 }}
                   key={comment.commentId}

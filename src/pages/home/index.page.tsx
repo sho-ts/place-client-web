@@ -1,13 +1,13 @@
 import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
-import { useGetPostsSWR } from '@/repositories/post/swr';
+import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import { HomeHeader } from '@/components/organisms/home';
 import { PostsGrid } from '@/components/organisms/post';
 import { Layout, Container } from '@/components/templates';
 import { Fragment } from 'react';
 
 const HomePage: NextPageWithLayout = () => {
-  const { data } = useGetPostsSWR();
+  const { data } = usePostsFindAllSWR();
 
   return (
     <Fragment>

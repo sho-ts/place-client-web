@@ -4,7 +4,7 @@ import { getHeaders } from '@/repositories';
 const createPost = async (data: FormData) => {
   const headers = await getHeaders();
 
-  return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/v1/post`, data, {
+  return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/v1/posts`, data, {
     headers,
   });
 };
