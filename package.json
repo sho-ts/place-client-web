@@ -19,6 +19,7 @@
     "axios": "^0.27.2",
     "destyle.css": "^3.0.2",
     "next": "12.2.3",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recoil": "^0.7.4",

@@ -8,6 +8,7 @@ import {
   ISignUpResult,
 } from 'amazon-cognito-identity-js';
 import { createUser } from '@/repositories/user/post';
+import nookies, { setCookie } from 'nookies';
 
 type LoginResult = {
   idToken: string;
@@ -77,8 +78,15 @@ class AuthService {
     return new Promise<LoginResult>((resolve, reject) => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
+          const accessToken = result.getAccessToken();
+
+          setCookie(null, 'sub', accessToken.decodePayload().sub, {
+            maxAge: 60 * 24 * 3,
+            path: '/',
+          });
+
           resolve({
-            accessToken: result.getAccessToken().getJwtToken(),
+            accessToken: accessToken.getJwtToken(),
             idToken: result.getIdToken().getJwtToken(),
           });
         },
@@ -102,12 +110,20 @@ class AuthService {
         user.getSession(
           (error: Error | null, session: CognitoUserSession | null) => {
             error && reject(error);
-            session &&
+            if (session) {
+              const accessToken = session.getAccessToken();
+
+              setCookie(null, 'sub', accessToken.decodePayload().sub, {
+                maxAge: 60 * 24 * 3,
+                path: '/',
+              });
+
               resolve({
                 user,
                 idToken: session.getIdToken().getJwtToken(),
-                accessToken: session.getAccessToken().getJwtToken(),
+                accessToken: accessToken.getJwtToken(),
               });
+            }
           }
         );
       } else {
