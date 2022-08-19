@@ -3,6 +3,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { Post } from '@/types/post';
 import type { ReactElement } from 'react';
 import dynamic from 'next/dynamic';
+import nookies from 'nookies';
 import { getPost } from '@/repositories/post/get';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TypographyHeader } from '@/components/molecules';
@@ -38,13 +39,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
   const postId = context.query.postId;
+  const cookies = nookies.get(context);
 
   try {
     if (!postId || typeof postId === 'object') {
       throw new Error('投稿IDが不正です');
     }
 
-    const { data } = await getPost(postId);
+    const { data } = await getPost(postId, cookies.sub);
 
     return {
       props: {
