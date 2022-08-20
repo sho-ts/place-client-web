@@ -139,6 +139,7 @@ const ChangeProfileForm: FC = () => {
             size="large"
             position="center"
             variant="contained"
+            disabled={isLoading || !formValues.name || !formValues.displayId}
           >
             完了
           </Button>
