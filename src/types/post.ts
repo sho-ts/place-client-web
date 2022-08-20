@@ -1,4 +1,5 @@
 import type { User } from '@/types/user';
+import { LIKED } from '@/constants/post';
 
 export type Post = {
   postId: string;
@@ -7,7 +8,7 @@ export type Post = {
     id: string;
     url: string;
   }[];
-  liked: number;
+  liked: LIKED;
   caption: string;
   createdAt: string;
 };
