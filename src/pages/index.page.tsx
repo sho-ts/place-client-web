@@ -1,9 +1,12 @@
 import type { NextPage } from 'next';
+import { APP_NAME } from '@/constants/service';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { AuthService } from '@/services';
 import { styled } from '@mui/material';
 import { Logo } from '@/components/atoms';
+import { Fragment } from 'react';
+import Head from 'next/head';
 
 const authService = new AuthService();
 
@@ -17,10 +20,10 @@ const Home: NextPage = () => {
     authService
       .getCurrentUser()
       .then(async () => {
-        router.push('/home')
+        router.push('/home');
       })
       .catch(() => {
-        router.push('/explore')
+        router.push('/explore');
       })
       .finally(() => {
         setChecked(true);
@@ -28,9 +31,14 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Base>
-      <Logo w={175} h={43} />
-    </Base>
+    <Fragment>
+      <Head>
+        <title>{`${APP_NAME}`}</title>
+      </Head>
+      <Base>
+        <Logo w={175} h={43} />
+      </Base>
+    </Fragment>
   );
 };
 

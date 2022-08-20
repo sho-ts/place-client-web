@@ -2,10 +2,12 @@ import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
 import type { User } from '@/types/user';
 import type { ReactElement } from 'react';
+import { APP_NAME } from '@/constants/service';
 import { getUser } from '@/repositories/user/get';
 import { TypographyHeader } from '@/components/molecules';
 import { Layout } from '@/components/templates';
 import { Fragment } from 'react';
+import Head from 'next/head';
 
 type Props = {
   user: User;
@@ -14,6 +16,9 @@ type Props = {
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
   return (
     <Fragment>
+      <Head>
+        <title>{`${user.userId} | ${APP_NAME}`}</title>
+      </Head>
       <TypographyHeader>{user.userId}</TypographyHeader>
     </Fragment>
   );
