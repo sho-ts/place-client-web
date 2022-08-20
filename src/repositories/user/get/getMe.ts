@@ -1,15 +1,12 @@
 import type { User } from '@/types/user';
+import axios from 'axios';
+import { getHeaders } from '@/repositories';
 
-const getMe = async (): Promise<{ data: User }> => {
-  return new Promise<{ data: User }>((resolve) => {
-    resolve({
-      data: {
-        userId: 'dummy',
-        name: 'ダミーユーザー',
-        avatar:
-          'https://images.unsplash.com/photo-1658890636421-3d3caa3a52b0?q=60',
-      },
-    });
+const getMe = async () => {
+  const headers = await getHeaders();
+
+  return axios.get<User>(`${process.env.NEXT_PUBLIC_API_URL}/v1/users`, {
+    headers,
   });
 };
 
