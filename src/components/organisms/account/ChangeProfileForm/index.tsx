@@ -9,7 +9,7 @@ import { useUserState } from '@/states';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
 import { Container } from '@/components/templates';
-import { Avatar, TextField, styled } from '@mui/material';
+import { Avatar as MUIAvatar, TextField, styled } from '@mui/material';
 import { Fragment } from 'react';
 
 const ChangeProfileForm: FC = () => {
@@ -105,7 +105,7 @@ const ChangeProfileForm: FC = () => {
       >
         プロフィールを編集
       </TypographyHeader>
-      <Container>
+      <Container maxW="sm">
         <ChangeAvatar sx={{ mb: 2 }}>
           <Avatar
             onClick={handleOnClick}
@@ -152,5 +152,15 @@ const ChangeAvatar = styled('div')`
   display: flex;
   justify-content: center;
 `;
+
+const Avatar = styled(MUIAvatar)(() => ({
+  width: 80,
+  height: 80,
+  cursor: 'pointer',
+  '@media screen and (min-width: 600px)': {
+    width: 120,
+    height: 120,
+  },
+}));
 
 export default ChangeProfileForm;
