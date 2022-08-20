@@ -8,18 +8,14 @@ type Props = {
   renderLeft?: () => JSX.Element;
 };
 
-const TypographyHeader: FC<Props> = ({
-  children,
-  renderLeft,
-  renderRight,
-}) => {
+const TypographyHeader: FC<Props> = ({ children, renderLeft, renderRight }) => {
   return (
     <BaseHeaderMobile>
       <Inner>
-        {renderLeft?.()}
+        {renderLeft && <Ends>{renderLeft()}</Ends>}
         <span />
         <Typography>{children}</Typography>
-        {renderRight?.()}
+        {renderRight && <Ends>{renderRight()}</Ends>}
       </Inner>
     </BaseHeaderMobile>
   );
@@ -34,6 +30,11 @@ const Typography = styled(MUITypography)(() => ({
   fontWeight: 'bold',
   width: '100%',
 }));
+
+const Ends = styled('div')`
+  position: relative;
+  z-index: 100;
+`;
 
 const Inner = styled(Box)(() => ({
   position: 'relative',
