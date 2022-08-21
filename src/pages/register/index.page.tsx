@@ -2,7 +2,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
 import { RegisterForm } from '@/components/organisms/guest';
-import { Container } from '@/components/templates';
+import { Container, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
@@ -18,7 +18,9 @@ const RegisterPage: NextPageWithLayout = () => {
 };
 
 RegisterPage.getLayout = (page: ReactElement) => (
-  <Container maxW="sm">{page}</Container>
+  <Wrapper>
+    <Container maxW="sm">{page}</Container>
+  </Wrapper>
 );
 
 export default RegisterPage;

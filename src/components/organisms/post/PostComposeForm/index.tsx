@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { createPost } from '@/repositories/post/post';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
-import { Container } from '@/components/templates';
+import { Container, Wrapper } from '@/components/templates';
 import { IconButton, TextField, Box, styled } from '@mui/material';
 import { AddCircleOutline } from '@mui/icons-material';
 import { Fragment } from 'react';
@@ -67,56 +67,58 @@ const PostComposeForm: FC = () => {
       >
         新規投稿
       </TypographyHeader>
-      <Container maxW="sm">
-        <Fields>
-          <input onChange={handleUpload} type="file" hidden ref={ref} />
-          {!file ? (
-            <Fragment>
-              <IconButton sx={{ mr: 1 }} onClick={handleOnClick} size="large">
-                <AddCircleOutline fontSize="inherit" />
-              </IconButton>
-            </Fragment>
-          ) : (
-            <div css={styles.thubmnail.base}>
-              <div
-                onClick={handleOnClick}
-                css={styles.thubmnail.inner}
-                style={{
-                  backgroundImage: `url(${objectUrl})`,
-                }}
-              />
-            </div>
-          )}
+      <Wrapper>
+        <Container maxW="sm">
+          <Fields>
+            <input onChange={handleUpload} type="file" hidden ref={ref} />
+            {!file ? (
+              <Fragment>
+                <IconButton sx={{ mr: 1 }} onClick={handleOnClick} size="large">
+                  <AddCircleOutline fontSize="inherit" />
+                </IconButton>
+              </Fragment>
+            ) : (
+              <div css={styles.thubmnail.base}>
+                <div
+                  onClick={handleOnClick}
+                  css={styles.thubmnail.inner}
+                  style={{
+                    backgroundImage: `url(${objectUrl})`,
+                  }}
+                />
+              </div>
+            )}
+            <TextField
+              multiline
+              rows={3}
+              fullWidth
+              label="キャプション"
+              variant="filled"
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+            />
+          </Fields>
           <TextField
-            multiline
-            rows={3}
+            sx={{ mb: 2 }}
             fullWidth
-            label="キャプション"
+            label="場所を検索"
             variant="filled"
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
+            value={areaKeyword}
+            onChange={(e) => setAreaKeyword(e.target.value)}
           />
-        </Fields>
-        <TextField
-          sx={{ mb: 2 }}
-          fullWidth
-          label="場所を検索"
-          variant="filled"
-          value={areaKeyword}
-          onChange={(e) => setAreaKeyword(e.target.value)}
-        />
-        {matches && (
-          <Button
-            size="large"
-            position="center"
-            onClick={handleSubmit}
-            disabled={!file}
-            variant="contained"
-          >
-            投稿
-          </Button>
-        )}
-      </Container>
+          {matches && (
+            <Button
+              size="large"
+              position="center"
+              onClick={handleSubmit}
+              disabled={!file}
+              variant="contained"
+            >
+              投稿
+            </Button>
+          )}
+        </Container>
+      </Wrapper>
     </Fragment>
   );
 };

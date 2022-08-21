@@ -2,7 +2,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
 import { LoginForm } from '@/components/organisms/guest';
-import { Container } from '@/components/templates';
+import { Container, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
@@ -15,7 +15,9 @@ LoginPage.getLayout = (page: ReactElement) => (
     <Head>
       <title>{`ログイン | ${APP_NAME}`}</title>
     </Head>
-    <Container maxW="sm">{page}</Container>
+    <Wrapper>
+      <Container maxW="sm">{page}</Container>
+    </Wrapper>
   </Fragment>
 );
 

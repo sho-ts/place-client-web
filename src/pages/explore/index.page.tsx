@@ -5,7 +5,7 @@ import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import { useRouter } from 'next/router';
 import { ExploreHeader } from '@/components/organisms/exploer';
 import { PostsGrid } from '@/components/organisms/post';
-import { Layout, Container } from '@/components/templates';
+import { Layout, Container, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
@@ -19,7 +19,13 @@ const ExplorePage: NextPageWithLayout = () => {
         <title>{`見つける | ${APP_NAME}`}</title>
       </Head>
       <ExploreHeader />
-      <Container>{data && <PostsGrid posts={data} xs={4} />}</Container>
+      <Wrapper>
+        <Container sx={{ px: { xs: '0', md: '8px' } }}>
+          {data && (
+            <PostsGrid spacing={{ xs: '1px', md: 1 }} posts={data} xs={4} />
+          )}
+        </Container>
+      </Wrapper>
     </Fragment>
   );
 };

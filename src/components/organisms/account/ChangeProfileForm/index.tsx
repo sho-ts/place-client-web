@@ -8,7 +8,7 @@ import { useState, useCallback, useRef } from 'react';
 import { useUserState } from '@/states';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
-import { Container } from '@/components/templates';
+import { Container, Wrapper } from '@/components/templates';
 import { Avatar as MUIAvatar, TextField, styled } from '@mui/material';
 import { Fragment } from 'react';
 
@@ -105,46 +105,48 @@ const ChangeProfileForm: FC = () => {
       >
         プロフィールを編集
       </TypographyHeader>
-      <Container maxW="sm">
-        <ChangeAvatar sx={{ mb: 2 }}>
-          <Avatar
-            onClick={handleOnClick}
-            sx={{
-              width: 70,
-              height: 70,
-            }}
-            src={objectUrl || user.avatar}
+      <Wrapper>
+        <Container maxW="sm">
+          <ChangeAvatar sx={{ mb: 2 }}>
+            <Avatar
+              onClick={handleOnClick}
+              sx={{
+                width: 70,
+                height: 70,
+              }}
+              src={objectUrl || user.avatar}
+            />
+            <input onChange={handleUpload} type="file" hidden ref={ref} />
+          </ChangeAvatar>
+          <TextField
+            sx={{ mb: 2 }}
+            fullWidth
+            variant="filled"
+            label="ユーザーID"
+            value={formValues.displayId}
+            onChange={changeDisplayIdValue}
           />
-          <input onChange={handleUpload} type="file" hidden ref={ref} />
-        </ChangeAvatar>
-        <TextField
-          sx={{ mb: 2 }}
-          fullWidth
-          variant="filled"
-          label="ユーザーID"
-          value={formValues.displayId}
-          onChange={changeDisplayIdValue}
-        />
-        <TextField
-          sx={{ mb: 2 }}
-          fullWidth
-          variant="filled"
-          label="ニックネーム"
-          value={formValues.name}
-          onChange={changeNameValue}
-        />
-        {matches && (
-          <Button
-            onClick={handleSubmit}
-            size="large"
-            position="center"
-            variant="contained"
-            disabled={isLoading || !formValues.name || !formValues.displayId}
-          >
-            完了
-          </Button>
-        )}
-      </Container>
+          <TextField
+            sx={{ mb: 2 }}
+            fullWidth
+            variant="filled"
+            label="ニックネーム"
+            value={formValues.name}
+            onChange={changeNameValue}
+          />
+          {matches && (
+            <Button
+              onClick={handleSubmit}
+              size="large"
+              position="center"
+              variant="contained"
+              disabled={isLoading || !formValues.name || !formValues.displayId}
+            >
+              完了
+            </Button>
+          )}
+        </Container>
+      </Wrapper>
     </Fragment>
   );
 };
