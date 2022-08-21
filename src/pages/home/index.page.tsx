@@ -17,7 +17,7 @@ const HomePage: NextPageWithLayout = () => {
         <title>{`ホーム | ${APP_NAME}`}</title>
       </Head>
       <HomeHeader />
-      <Container>{data && <PostsGrid posts={data} />}</Container>
+      <Container>{data && <PostsGrid posts={data} xs={12} md={4} />}</Container>
     </Fragment>
   );
 };

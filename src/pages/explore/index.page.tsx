@@ -19,7 +19,7 @@ const ExplorePage: NextPageWithLayout = () => {
         <title>{`見つける | ${APP_NAME}`}</title>
       </Head>
       <ExploreHeader />
-      <Container>{data && <PostsGrid posts={data} />}</Container>
+      <Container>{data && <PostsGrid posts={data} xs={4} />}</Container>
     </Fragment>
   );
 };
