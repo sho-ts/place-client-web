@@ -20,27 +20,23 @@ const AuthProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     if (isMounted.current) return;
 
-    authService
-      .getCurrentUser()
-      .then(async () => {
-        try {
-          const response = await getMe();
+    (async () => {
+      try {
+        await authService.getCurrentUser();
+        const response = await getMe();
 
-          setUser({
-            isLogin: true,
-            ...response.data,
-          });
-        } catch (error) {
-          throw new Error('ユーザー情報の取得に失敗');
-        }
-      })
-      .catch(() => {
+        setUser({
+          isLogin: true,
+          ...response.data,
+        });
+      } catch (error) {
         setUser(defaultState);
-      })
-      .finally(() => {
+      } finally {
+        console.log(1)
         setChecked(true);
         isMounted.current = true;
-      });
+      }
+    })();
   }, []);
 
   if (checked) {
