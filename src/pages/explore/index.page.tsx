@@ -11,7 +11,7 @@ import Head from 'next/head';
 
 const ExplorePage: NextPageWithLayout = () => {
   const router = useRouter();
-  const { data } = usePostsFindAllSWR(router.query.keyword);
+  const { data } = usePostsFindAllSWR({ search: router.query.keyword });
 
   return (
     <Fragment>
