@@ -13,14 +13,13 @@ type Props = {
 };
 
 const AuthProvider: FC<Props> = ({ children }) => {
-  const isMounted = useRef(false);
   const [checked, setChecked] = useState(false);
   const [, setUser] = useUserState();
 
   useEffect(() => {
-    if (isMounted.current) return;
-
     (async () => {
+      if (checked) return;
+
       try {
         await authService.getCurrentUser();
         const response = await getMe();
@@ -32,9 +31,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
       } catch (error) {
         setUser(defaultState);
       } finally {
-        console.log(1)
         setChecked(true);
-        isMounted.current = true;
       }
     })();
   }, []);
