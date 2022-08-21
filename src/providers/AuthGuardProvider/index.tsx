@@ -17,7 +17,7 @@ const AuthGuardProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useUserState();
 
   useEffect(() => {
-    if (isMounted.current || user.isLogin) return;
+    if (isMounted.current) return;
 
     authService
       .getCurrentUser()
