@@ -4,8 +4,12 @@ import type { User } from '@/types/user';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
 import { getUser } from '@/repositories/user/get';
+import { useUserState } from '@/states';
+import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import { TypographyHeader } from '@/components/molecules';
-import { Layout } from '@/components/templates';
+import { PostsGrid } from '@/components/organisms/post';
+import { UserProfile } from '@/components/organisms/user';
+import { Layout, Container, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
 
@@ -14,12 +18,29 @@ type Props = {
 };
 
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
+  const { data } = usePostsFindAllSWR({
+    userId: user.userId,
+    limit: 9,
+  });
+  const [me] = useUserState();
+  const isMe = user.userId === me.userId;
+
   return (
     <Fragment>
       <Head>
         <title>{`${user.userId} | ${APP_NAME}`}</title>
       </Head>
       <TypographyHeader>{user.userId}</TypographyHeader>
+      <Wrapper>
+        <Container sx={{ mb: 2 }}>
+          <UserProfile user={user} />
+        </Container>
+        <Container sx={{ px: { xs: '0', md: '8px' } }}>
+          {data && (
+            <PostsGrid spacing={{ xs: '1px', md: 1 }} posts={data} xs={4} />
+          )}
+        </Container>
+      </Wrapper>
     </Fragment>
   );
 };

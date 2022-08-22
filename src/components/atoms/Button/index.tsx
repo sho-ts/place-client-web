@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { ButtonProps } from '@mui/material/Button';
-import { Button as MUIButton } from '@mui/material';
+import type { SxProps } from '@mui/system/styleFunctionSx';
+import { Button as MUIButton, styled } from '@mui/material';
 import Link from 'next/link';
 import { css } from '@emotion/react';
 
@@ -9,13 +10,19 @@ type ButtonPosition = 'left' | 'center' | 'right';
 type Props = ButtonProps & {
   position?: ButtonPosition;
   href?: string;
+  sx?: SxProps;
 };
 
 const Button: FC<Props> = (baseProps) => {
-  const { position = 'left', href, ...props } = baseProps;
+  const { position = 'flex-start', href, sx, ...props } = baseProps;
 
   return (
-    <div css={styles.base(position)}>
+    <Base
+      sx={{
+        ...sx,
+        justifyContent: position,
+      }}
+    >
       {href ? (
         <Link passHref href={href}>
           <a css={styles.link}>
@@ -25,9 +32,13 @@ const Button: FC<Props> = (baseProps) => {
       ) : (
         <MUIButton {...props} />
       )}
-    </div>
+    </Base>
   );
 };
+
+const Base = styled('div')`
+  display: flex;
+`;
 
 const styles = {
   base: (position: ButtonPosition) => css`
