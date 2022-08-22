@@ -1,6 +1,8 @@
 import type { FC, ChangeEvent } from 'react';
 
 import { AuthService } from '@/services';
+import { getMe } from '@/repositories/user/get';
+import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
@@ -10,6 +12,7 @@ import { Fragment } from 'react';
 
 const LoginForm: FC = () => {
   const router = useRouter();
+  const [, setUser] = useUserState();
 
   const [formValues, setFormValues] = useState({
     email: '',
@@ -40,6 +43,13 @@ const LoginForm: FC = () => {
     const authService = new AuthService();
     try {
       await authService.login(formValues.email, formValues.password);
+      
+      const response = await getMe();
+      setUser({
+        isLogin: true,
+        ...response.data,
+      })
+
       router.push('/home');
     } catch (error) {
       alert('ログインに失敗しました');
