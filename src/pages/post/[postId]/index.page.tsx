@@ -2,13 +2,13 @@ import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
 import type { Post } from '@/types/post';
 import type { ReactElement } from 'react';
-import { APP_NAME } from '@/constants/service'
+import { APP_NAME } from '@/constants/service';
 import dynamic from 'next/dynamic';
 import nookies from 'nookies';
 import { getPost } from '@/repositories/post/get';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TypographyHeader } from '@/components/molecules';
-import { Layout } from '@/components/templates';
+import { Layout, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
 const PostArticlePC = dynamic(
@@ -31,11 +31,13 @@ const PostPage: NextPageWithLayout<Props> = ({ post }) => {
         <title>{`${post.user.userId}さんの投稿 | ${APP_NAME}`}</title>
       </Head>
       <TypographyHeader>投稿</TypographyHeader>
-      {matches ? (
-        <PostArticleMobile post={post} />
-      ) : (
-        <PostArticlePC post={post} />
-      )}
+      <Wrapper>
+        {matches ? (
+          <PostArticleMobile post={post} />
+        ) : (
+          <PostArticlePC post={post} />
+        )}
+      </Wrapper>
     </Fragment>
   );
 };
