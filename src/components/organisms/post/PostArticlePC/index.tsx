@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { Post, Comment } from '@/types/post';
+import { styled } from '@mui/system';
 import { useGetPostCommentSWR } from '@/repositories/comment/swr';
 import {
   PostAuthor,
@@ -8,7 +9,9 @@ import {
   PostIconButtons,
 } from '@/components/organisms/post';
 import { Container } from '@/components/templates';
-import { Button, Box, TextField, styled } from '@mui/material';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import Image from 'next/image';
 
 type Props = {

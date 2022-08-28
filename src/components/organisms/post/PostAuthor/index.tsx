@@ -1,7 +1,9 @@
 import type { FC } from 'react';
 import type { User } from '@/types/user';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { Avatar, Box, styled } from '@mui/material';
+import { styled } from '@mui/system';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import { PostAuthorName } from '@/components/organisms/post';
 
 type Props = {

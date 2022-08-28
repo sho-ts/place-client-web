@@ -1,7 +1,9 @@
 import type { FC, ReactNode } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { AppBar as MUIAppBar, Toolbar, styled } from '@mui/material';
+import MUIAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { styled } from '@mui/system';
 import { Fragment } from 'react';
 
 type Props = {

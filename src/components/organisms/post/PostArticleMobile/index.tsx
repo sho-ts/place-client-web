@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { Post } from '@/types/post';
+import { styled } from '@mui/system';
 import {
   PostAuthor,
   PostCaption,
@@ -7,7 +8,8 @@ import {
   PostIconButtons,
 } from '@/components/organisms/post';
 import { Container } from '@/components/templates';
-import { Box, Container as MUIContainer, styled } from '@mui/material';
+import Box from '@mui/material/Box';
+import MUIContainer from '@mui/material/Container';
 import { Fragment } from 'react';
 import Image from 'next/image';
 

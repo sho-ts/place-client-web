@@ -1,10 +1,12 @@
 import type { FC, ChangeEvent } from 'react';
 
+import { styled } from '@mui/system';
 import { AuthService } from '@/services';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
-import { TextField, Box, styled } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import { Button, Logo } from '@/components/atoms';
 import { Fragment } from 'react';
 

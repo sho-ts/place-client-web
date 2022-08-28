@@ -1,11 +1,9 @@
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
-import {
-  BottomNavigation as MUIBottomNavi,
-  BottomNavigationAction,
-  styled,
-} from '@mui/material';
+import MUIBottomNavi from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@/mui/material/BottomNavigationAction';
+import { styled } from '@mui/system';
 import { Home, Search, Person, AddBox } from '@mui/icons-material';
 
 const Header: FC = () => {

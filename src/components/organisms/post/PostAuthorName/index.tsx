@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { User } from '@/types/user';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { styled } from '@mui/material';
+import { styled } from '@mui/system';
 import Link from 'next/link';
 
 type Props = {

@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import type { ButtonProps } from '@mui/material/Button';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { Button as MUIButton, styled } from '@mui/material';
+import MUIButton from '@mui/material/Button';
+import { styled } from '@mui/system';
 import Link from 'next/link';
 import { css } from '@emotion/react';
 

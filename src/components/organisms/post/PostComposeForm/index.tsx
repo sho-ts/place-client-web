@@ -1,5 +1,6 @@
 import type { FC, ChangeEventHandler } from 'react';
 import { css } from '@emotion/react';
+import { styled } from '@mui/system';
 import { useRef, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -8,8 +9,10 @@ import { createPost } from '@/repositories/post/post';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
 import { Container, Wrapper } from '@/components/templates';
-import { IconButton, TextField, Box, styled } from '@mui/material';
-import { AddCircleOutline } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import { Fragment } from 'react';
 
 const PostComposeForm: FC = () => {

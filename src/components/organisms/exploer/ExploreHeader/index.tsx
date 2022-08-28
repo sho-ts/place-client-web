@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { usePostSearch } from '@/hooks';
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 import { BaseHeaderMobile } from '@/components/molecules';
 
 const ExploerHeader: FC = () => {

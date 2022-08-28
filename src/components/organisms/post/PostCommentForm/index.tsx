@@ -4,7 +4,8 @@ import type { Post } from '@/types/post';
 import type { CommentsFindAllResponse } from '@/types/response/comment';
 import { useState, useCallback } from 'react';
 import { createComment } from '@/repositories/comment/post';
-import { Button, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { Fragment } from 'react';
 
 type Props = {

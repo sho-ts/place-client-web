@@ -1,5 +1,6 @@
 import type { FC, ChangeEventHandler } from 'react';
 import type { ChangeEvent } from 'react';
+import { styled } from '@mui/system';
 import { changeProfile } from '@/repositories/user/put';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -9,7 +10,8 @@ import { useUserState } from '@/states';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
 import { Container, Wrapper } from '@/components/templates';
-import { Avatar as MUIAvatar, TextField, styled } from '@mui/material';
+import MUIAvatar from '@mui/material/Avatar'
+import TextField from '@mui/material/TextField';
 import { Fragment } from 'react';
 
 const ChangeProfileForm: FC = () => {

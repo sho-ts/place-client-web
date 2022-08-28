@@ -1,5 +1,7 @@
 import type { FC, ReactNode } from 'react';
-import { Typography as MUITypography, Box, styled } from '@mui/material';
+import { styled } from '@mui/system';
+import MUITypography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import { BaseHeaderMobile } from '@/components/molecules';
 
 type Props = {

@@ -1,16 +1,17 @@
 import type { FC } from 'react';
+import { styled } from '@mui/system';
 import { useRouter } from 'next/router';
 import { usePostSearch } from '@/hooks';
 import { useUserState } from '@/states';
-import {
-  AppBar as MUIAppBar,
-  Toolbar as MUIToolbar,
-  TextField,
-  IconButton,
-  Box,
-  styled,
-} from '@mui/material';
-import { Home, Search, Person, AddBox } from '@mui/icons-material';
+import MUIAppBar from '@mui/material/AppBar';
+import MUIToolbar from '@mui/material/Toolbar';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
+import Home from '@mui/icons-material/Home';
+import Search from '@mui/icons-material/Search';
+import Person from '@mui/icons-material/Person';
+import AddBox from '@mui/icons-material/AddBox';
 import { Logo } from '@/components/atoms';
 
 const PCHeader: FC = () => {

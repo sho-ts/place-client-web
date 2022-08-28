@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { Post } from '@/types/post';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { styled } from '@mui/material';
+import { styled } from '@mui/system';
 
 type Props = {
   createdAt: string;

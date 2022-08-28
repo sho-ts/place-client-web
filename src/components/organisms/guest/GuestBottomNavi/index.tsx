@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { Box, styled } from '@mui/material';
+import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
 import { Button } from '@/components/atoms';
 
 const GuestBottomNavi: FC = () => {

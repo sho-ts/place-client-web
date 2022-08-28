@@ -6,12 +6,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
 import { useCallback } from 'react';
-import { Box, IconButton } from '@mui/material';
-import {
-  Favorite,
-  FavoriteBorder,
-  ChatBubbleOutlineOutlined,
-} from '@mui/icons-material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import ChatBubbleOutlineOutlined from '@mui/icons-material/ChatBubbleOutlineOutlined';
 
 type Props = {
   post: Post;

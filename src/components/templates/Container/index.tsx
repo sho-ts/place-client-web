@@ -1,7 +1,8 @@
 import type { FC, ReactNode } from 'react';
 import type { Breakpoint } from '@mui/system/createTheme';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { Container as MUIContainer, styled } from '@mui/material';
+import { styled } from '@mui/system';
+import MUIContainer from '@mui/material/Container';
 
 type Props = {
   children?: ReactNode;

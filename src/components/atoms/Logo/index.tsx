@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { Typography, styled } from '@mui/material';
+import { styled } from '@mui/system';
+import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 
 type Props = {
