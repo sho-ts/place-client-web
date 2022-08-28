@@ -27,7 +27,7 @@ const Header: FC = () => {
         icon={<AddBox sx={styles.icon} />}
       />
       <BottomNavigationAction
-        onClick={() => router.push(`/${user.userId}`)}
+        onClick={() => router.push(`/${user.displayId}`)}
         icon={<Person sx={styles.icon} />}
       />
     </BottomNavigation>

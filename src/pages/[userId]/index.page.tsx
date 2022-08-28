@@ -19,18 +19,16 @@ type Props = {
 
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
   const { data } = usePostsFindAllSWR({
-    userId: user.userId,
+    displayId: user.displayId,
     limit: 9,
   });
-  const [me] = useUserState();
-  const isMe = user.userId === me.userId;
 
   return (
     <Fragment>
       <Head>
-        <title>{`${user.userId} | ${APP_NAME}`}</title>
+        <title>{`${user.displayId} | ${APP_NAME}`}</title>
       </Head>
-      <TypographyHeader>{user.userId}</TypographyHeader>
+      <TypographyHeader>{user.displayId}</TypographyHeader>
       <Wrapper>
         <Container sx={{ mb: 2 }}>
           <UserProfile user={user} />

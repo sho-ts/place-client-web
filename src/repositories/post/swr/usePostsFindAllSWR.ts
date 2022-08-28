@@ -5,14 +5,14 @@ import useSWR from 'swr';
 
 type Args = {
   search?: string | string[];
-  userId?: string;
+  displayId?: string;
   limit?: number;
 };
 
 const usePostsFindAllSWR = (args?: Args) => {
   const query = queryBuilder({
     search: args?.search,
-    userId: args?.userId,
+    displayId: args?.displayId,
     limit: args?.limit ?? 12,
   });
 

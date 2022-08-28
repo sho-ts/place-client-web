@@ -45,7 +45,7 @@ const PCHeader: FC = () => {
           <IconButton onClick={() => router.push('/post/compose')}>
             <AddBox sx={styles.icon} />
           </IconButton>
-          <IconButton onClick={() => router.push(`/${user.userId}`)}>
+          <IconButton onClick={() => router.push(`/${user.displayId}`)}>
             <Person sx={styles.icon} />
           </IconButton>
         </Icons>

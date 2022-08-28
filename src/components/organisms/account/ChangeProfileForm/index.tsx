@@ -22,7 +22,7 @@ const ChangeProfileForm: FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [objectUrl, setObjectUrl] = useState<string>('');
   const [formValues, setFormValues] = useState({
-    displayId: user.userId,
+    displayId: user.displayId,
     name: user.name,
   });
 
@@ -77,7 +77,7 @@ const ChangeProfileForm: FC = () => {
         ...res.data,
       });
 
-      router.push(`/${res.data.userId}`);
+      router.push(`/${res.data.displayId}`);
     } catch (error) {
       alert('ユーザー情報の更新に失敗しました');
       setIsLoading(false);

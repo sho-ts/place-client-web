@@ -12,8 +12,8 @@ type Props = {
 const PostAuthorName: FC<Props> = ({ user, sx }) => {
   return (
     <Base sx={sx}>
-      <Link href={`/${user.userId}`}>
-        <a>{user.userId}</a>
+      <Link href={`/${user.displayId}`}>
+        <a>{user.displayId}</a>
       </Link>
     </Base>
   );

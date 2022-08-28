@@ -27,8 +27,8 @@ const UserProfile: FC<Props> = ({ user }) => {
         )}
       </Header>
       <Body>
-        <UserId>{user.userId}</UserId>
-        <UserName>{user.name || user.userId}</UserName>
+        <UserId>{user.displayId}</UserId>
+        <UserName>{user.name || user.displayId}</UserName>
       </Body>
     </Fragment>
   );
