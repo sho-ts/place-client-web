@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { Post, Comment } from '@/types/post';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { useGetPostCommentSWR } from '@/repositories/comment/swr';
 import {
   PostAuthor,

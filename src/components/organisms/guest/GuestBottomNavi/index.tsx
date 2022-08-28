@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Button } from '@/components/atoms';
 

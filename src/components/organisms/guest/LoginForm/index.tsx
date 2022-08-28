@@ -1,7 +1,7 @@
 import type { FC, ChangeEvent } from 'react';
 
 import { AuthService } from '@/services';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { getMe } from '@/repositories/user/get';
 import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';

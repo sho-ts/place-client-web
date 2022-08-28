@@ -1,6 +1,6 @@
 import type { User } from '@/types/user';
 import type { FC } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { useUserState } from '@/states';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@/components/atoms';

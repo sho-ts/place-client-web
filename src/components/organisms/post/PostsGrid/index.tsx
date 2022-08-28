@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { PostsFindAllResponse } from '@/types/response/post';
 import type { ResponsiveStyleValue } from '@/types/style';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Image from 'next/image';

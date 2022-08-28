@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 

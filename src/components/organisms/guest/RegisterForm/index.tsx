@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
 
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { AuthService } from '@/services';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';

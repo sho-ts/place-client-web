@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import MUITypography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { BaseHeaderMobile } from '@/components/molecules';

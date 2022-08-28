@@ -1,6 +1,6 @@
 import type { FC, ChangeEventHandler } from 'react';
 import { css } from '@emotion/react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { useRef, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import useMediaQuery from '@mui/material/useMediaQuery';

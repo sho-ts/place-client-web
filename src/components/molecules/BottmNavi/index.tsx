@@ -2,9 +2,12 @@ import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { useUserState } from '@/states';
 import MUIBottomNavi from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@/mui/material/BottomNavigationAction';
-import { styled } from '@mui/system';
-import { Home, Search, Person, AddBox } from '@mui/icons-material';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import { styled } from '@mui/material/styles';
+import Home from '@mui/icons-material/Home';
+import Search from '@mui/icons-material/Search';
+import Person from '@mui/icons-material/Person';
+import AddBox from '@mui/icons-material/AddBox';
 
 const Header: FC = () => {
   const router = useRouter();

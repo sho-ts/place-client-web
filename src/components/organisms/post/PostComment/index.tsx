@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { Comment } from '@/types/post';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { PostAuthorName, PostCreatedAt } from '@/components/organisms/post';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';

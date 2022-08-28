@@ -1,6 +1,6 @@
 import type { FC, ChangeEventHandler } from 'react';
 import type { ChangeEvent } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { changeProfile } from '@/repositories/user/put';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';

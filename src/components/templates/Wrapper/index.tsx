@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import type { SxProps } from '@mui/system/styleFunctionSx';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 
 type Props = {
   children?: ReactNode;

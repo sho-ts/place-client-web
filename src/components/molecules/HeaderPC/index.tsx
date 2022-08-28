@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { usePostSearch } from '@/hooks';
 import { useUserState } from '@/states';
