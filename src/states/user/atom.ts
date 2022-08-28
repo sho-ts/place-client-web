@@ -7,6 +7,7 @@ export type UserState = {
 
 export const defaultState: UserState = {
   isLogin: false,
+  displayId: '',
   userId: '',
   name: '',
   avatar: '',
