@@ -28,7 +28,7 @@ const PostPage: NextPageWithLayout<Props> = ({ post }) => {
   return (
     <Fragment>
       <Head>
-        <title>{`${post.user.userId}さんの投稿 | ${APP_NAME}`}</title>
+        <title>{`${post.user.displayId}さんの投稿 | ${APP_NAME}`}</title>
       </Head>
       <TypographyHeader>投稿</TypographyHeader>
       <Wrapper>
