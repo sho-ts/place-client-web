@@ -88,7 +88,7 @@ const ChangeProfileForm: FC = () => {
     <Fragment>
       <TypographyHeader
         renderLeft={() => (
-          <Button href={`/${user.userId}`} size="small" variant="outlined">
+          <Button href={`/${user.displayId}`} size="small" variant="outlined">
             戻る
           </Button>
         )}
