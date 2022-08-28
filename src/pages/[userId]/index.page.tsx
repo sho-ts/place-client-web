@@ -4,8 +4,11 @@ import type { User } from '@/types/user';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
 import { getUser } from '@/repositories/user/get';
-import { useUserState } from '@/states';
 import { usePostsFindAllSWR } from '@/repositories/post/swr';
+import {
+  useGetFollowsByDisplayIdSWR,
+  useGetFollowersByDisplayIdSWR,
+} from '@/repositories/follow/swr';
 import { TypographyHeader } from '@/components/molecules';
 import { PostsGrid } from '@/components/organisms/post';
 import { UserProfile } from '@/components/organisms/user';
@@ -18,9 +21,15 @@ type Props = {
 };
 
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
-  const { data } = usePostsFindAllSWR({
+  const { data: postsData } = usePostsFindAllSWR({
     displayId: user.displayId,
     limit: 9,
+  });
+  const { data: followsData } = useGetFollowsByDisplayIdSWR({
+    displayId: user.displayId,
+  });
+  const { data: followersData } = useGetFollowersByDisplayIdSWR({
+    displayId: user.displayId,
   });
 
   return (
@@ -31,11 +40,22 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
       <TypographyHeader>{user.displayId}</TypographyHeader>
       <Wrapper>
         <Container sx={{ mb: 2 }}>
-          <UserProfile user={user} />
+          <UserProfile
+            user={user}
+            totalPosts={postsData?.total}
+            totalFollows={followsData?.total}
+            totalFollowers={followersData?.total}
+          />
         </Container>
         <Container sx={{ px: { xs: '0', md: '8px' } }}>
-          {data && (
-            <PostsGrid spacing={{ xs: '1px', md: 1 }} posts={data} xs={4} />
+          {postsData && (
+            <div id="posts">
+              <PostsGrid
+                spacing={{ xs: '1px', md: 1 }}
+                posts={postsData}
+                xs={4}
+              />
+            </div>
           )}
         </Container>
       </Wrapper>
