@@ -5,7 +5,7 @@ const toggleLike = async (postId: string) => {
   const headers = await getHeaders();
 
   return axios.put(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/posts/${postId}/like`,
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/posts/${postId}/likes`,
     {},
     {
       headers,
