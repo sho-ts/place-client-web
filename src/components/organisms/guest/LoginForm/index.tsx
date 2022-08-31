@@ -1,7 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
 
 import { AuthService } from '@/services';
-import { styled } from '@mui/material/styles';
 import { getMe } from '@/repositories/user/get';
 import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';
@@ -9,7 +8,7 @@ import { useRouter } from 'next/router';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { Button, Logo, TextLink } from '@/components/atoms';
+import { Button, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
 const LoginForm: FC = () => {
@@ -60,9 +59,6 @@ const LoginForm: FC = () => {
 
   return (
     <Fragment>
-      <Header>
-        <Logo />
-      </Header>
       <TextField
         onChange={changeEmailValue}
         sx={{ mb: 2 }}
@@ -102,13 +98,5 @@ const LoginForm: FC = () => {
     </Fragment>
   );
 };
-
-const Header = styled('div')(() => ({
-  width: 300,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  margin: '0 auto 40px',
-}));
 
 export default LoginForm;

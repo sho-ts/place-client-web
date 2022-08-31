@@ -1,13 +1,13 @@
 import type { FC, ChangeEvent } from 'react';
 
-import { styled } from '@mui/material/styles';
+import CryptoJS from 'crypto-js';
 import { AuthService } from '@/services';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { Button, Logo, TextLink } from '@/components/atoms';
+import { Button, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
 const RegisterForm: FC = () => {
@@ -69,7 +69,7 @@ const RegisterForm: FC = () => {
         formValues.email,
         formValues.password
       );
-      router.push('/login');
+      router.push(`/register/verify?e=${CryptoJS.AES.encrypt(formValues.email, process.env.NEXT_PUBLIC_CRYPTO_KEY)}`);
     } catch (error) {
       alert('新規登録に失敗しました');
     }
@@ -77,9 +77,6 @@ const RegisterForm: FC = () => {
 
   return (
     <Fragment>
-      <Header>
-        <Logo />
-      </Header>
       <TextField
         onChange={changeUserIdValue}
         sx={{ mb: 2 }}
@@ -135,13 +132,5 @@ const RegisterForm: FC = () => {
     </Fragment>
   );
 };
-
-const Header = styled(Box)(() => ({
-  width: 300,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  margin: '0 auto 40px',
-}));
 
 export default RegisterForm;
