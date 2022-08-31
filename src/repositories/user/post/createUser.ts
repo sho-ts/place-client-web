@@ -4,7 +4,7 @@ import type { User } from '@/types/user';
 type RequestBody = {
   authId: string;
   name: string;
-  userId: string;
+  displayId: string;
 };
 
 type Response = User;
