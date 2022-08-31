@@ -8,14 +8,14 @@ import { Button } from '@/components/atoms';
 import { Fragment } from 'react';
 
 const VerifyEmailForm: FC = () => {
-  const [verifyKey, setVerifyKey] = useState('');
+  const [verifyKey, setVerifyKey] = useState<string>('');
   const router = useRouter();
 
   const changeVerifyKey: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event) => {
       setVerifyKey(event.target.value);
     },
-    [verifyKey]
+    [setVerifyKey]
   );
 
   const verifyEmail = useCallback(async () => {
