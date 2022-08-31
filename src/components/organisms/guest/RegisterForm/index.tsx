@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { Button, Logo } from '@/components/atoms';
+import { Button, Logo, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
 const RegisterForm: FC = () => {
@@ -122,6 +122,18 @@ const RegisterForm: FC = () => {
       >
         新規登録
       </Button>
+      <Box
+        sx={{
+          mt: 2,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
+        <TextLink href="/register">
+          <a>ログインはこちら</a>
+        </TextLink>
+      </Box>
     </Fragment>
   );
 };

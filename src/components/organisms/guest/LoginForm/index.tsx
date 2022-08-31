@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { Button, Logo } from '@/components/atoms';
+import { Button, Logo, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
 const LoginForm: FC = () => {
@@ -45,12 +45,12 @@ const LoginForm: FC = () => {
     const authService = new AuthService();
     try {
       await authService.login(formValues.email, formValues.password);
-      
+
       const response = await getMe();
       setUser({
         isLogin: true,
         ...response.data,
-      })
+      });
 
       router.push('/home');
     } catch (error) {
@@ -89,11 +89,23 @@ const LoginForm: FC = () => {
       >
         ログイン
       </Button>
+      <Box
+        sx={{
+          mt: 2,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
+        <TextLink href="/register">
+          <a>新規登録はこちら</a>
+        </TextLink>
+      </Box>
     </Fragment>
   );
 };
 
-const Header = styled(Box)(() => ({
+const Header = styled('div')(() => ({
   width: 300,
   display: 'flex',
   justifyContent: 'center',
