@@ -32,7 +32,7 @@ class AuthService {
     ClientId: process.env.NEXT_PUBLIC_CLIENT_ID,
   });
 
-  register(name: string, userId: string, email: string, password: string) {
+  register(name: string, displayId: string, email: string, password: string) {
     const attributes = [
       new CognitoUserAttribute({
         Name: 'email',
@@ -60,9 +60,22 @@ class AuthService {
       return createUser({
         authId: result.userSub,
         name,
-        userId,
+        displayId,
       });
     });
+  }
+
+  verifyEmail(email: string, code: string) {
+    const user = new CognitoUser({
+      Username: email,
+      Pool: this.cognitoUserPoll,
+    })
+
+    return new Promise<void>((resolve, reject)=> {
+      user.confirmRegistration(code, true, (error) => {
+        error ? reject(error) : resolve();
+      })
+    })
   }
 
   login(email: string, password: string) {
