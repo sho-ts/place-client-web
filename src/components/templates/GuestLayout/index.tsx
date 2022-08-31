@@ -10,7 +10,7 @@ type Props = {
 const GuestLayout: FC<Props> = ({ children }) => {
   return (
     <Wrapper>
-      <Container>
+      <Container maxW="sm">
         <Header>
           <Logo />
         </Header>
