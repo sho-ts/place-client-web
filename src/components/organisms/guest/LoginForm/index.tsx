@@ -97,9 +97,7 @@ const LoginForm: FC = () => {
           width: '100%',
         }}
       >
-        <TextLink href="/register">
-          <a>新規登録はこちら</a>
-        </TextLink>
+        <TextLink href="/register">新規登録はこちら</TextLink>
       </Box>
     </Fragment>
   );

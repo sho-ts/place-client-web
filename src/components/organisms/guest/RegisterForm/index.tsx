@@ -130,9 +130,7 @@ const RegisterForm: FC = () => {
           width: '100%',
         }}
       >
-        <TextLink href="/register">
-          <a>ログインはこちら</a>
-        </TextLink>
+        <TextLink href="/login">ログインはこちら</TextLink>
       </Box>
     </Fragment>
   );
