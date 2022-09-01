@@ -97,7 +97,7 @@ const UserProfile: FC<Props> = ({
             onClick={handleToggleFollow}
             variant="outlined"
           >
-            {isFollow ? 'フォローする' : 'フォロー解除'}
+            {isFollow ? 'フォロー解除' : 'フォローする'}
           </Button>
         )}
       </Footer>
