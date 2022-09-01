@@ -3,6 +3,7 @@ import type { NextPageWithLayout } from '@/types/page';
 import type { UserDetail } from '@/types/user';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
+import nookies from 'nookies';
 import { getUser } from '@/repositories/user/get';
 import { useCallback } from 'react';
 import { usePostsFindAllSWR } from '@/repositories/post/swr';
@@ -26,17 +27,19 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
     displayId: user.displayId,
     limit: 9,
   });
-  const { data: followsData, mutate: followsMutate } = useGetFollowsByDisplayIdSWR({
-    displayId: user.displayId,
-  });
-  const { data: followersData, mutate: followersMutate } = useGetFollowersByDisplayIdSWR({
-    displayId: user.displayId,
-  });
+  const { data: followsData, mutate: followsMutate } =
+    useGetFollowsByDisplayIdSWR({
+      displayId: user.displayId,
+    });
+  const { data: followersData, mutate: followersMutate } =
+    useGetFollowersByDisplayIdSWR({
+      displayId: user.displayId,
+    });
 
-  const handleMutation = useCallback(()=>{
+  const handleMutation = useCallback(() => {
     followsMutate();
     followersMutate();
-  },[followsMutate, followersMutate])
+  }, [followsMutate, followersMutate]);
 
   return (
     <Fragment>
@@ -73,14 +76,15 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const userId = context.query.userId;
+  const displayId = context.query.userId;
+  const cookies = nookies.get(context);
 
   try {
-    if (!userId || typeof userId === 'object') {
+    if (!displayId || typeof displayId === 'object') {
       throw new Error('ユーザーIDが不正です');
     }
 
-    const response = await getUser(userId);
+    const response = await getUser({ displayId, requestUserId: cookies.sub });
 
     return {
       props: {
