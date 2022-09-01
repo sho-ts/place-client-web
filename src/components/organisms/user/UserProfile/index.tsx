@@ -1,17 +1,21 @@
-import type { User } from '@/types/user';
+import type { UserDetail } from '@/types/user';
 import type { FC } from 'react';
+import { FOLLOW_STATUS } from '@/constants/follow';
 import { styled } from '@mui/material/styles';
+import { toggleFollow } from '@/repositories/follow/put';
 import { useUserState } from '@/states';
+import { useState, useCallback } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@/components/atoms';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
 type Props = {
-  user: User;
+  user: UserDetail;
   totalPosts?: number;
   totalFollows?: number;
   totalFollowers?: number;
+  handleMutation: () => void;
 };
 
 const UserProfile: FC<Props> = ({
@@ -19,9 +23,33 @@ const UserProfile: FC<Props> = ({
   totalPosts,
   totalFollows,
   totalFollowers,
+  handleMutation,
 }) => {
   const [me] = useUserState();
   const isMe = user.userId === me.userId;
+  const [isFollow, setIsFollow] = useState(
+    user.followStatus === FOLLOW_STATUS.FOLLOW
+  );
+  const [toggleFollowButtonLoading, setToggleFollowButtonLoading] =
+    useState(false);
+
+  const handleToggleFollow = useCallback(async () => {
+    try {
+      setToggleFollowButtonLoading(true);
+
+      await toggleFollow({
+        followUserId: user.userId,
+      });
+
+      setIsFollow(!isFollow);
+
+      handleMutation();
+    } catch (error) {
+      alert('エラーが発生しました');
+    } finally {
+      setToggleFollowButtonLoading(false);
+    }
+  }, [user, isFollow, handleMutation]);
 
   return (
     <Fragment>
@@ -34,21 +62,21 @@ const UserProfile: FC<Props> = ({
           <Count href="#posts">
             <dl>
               <dt>投稿</dt>
-              <dd>{totalPosts}</dd>
+              <dd>{totalPosts ?? ' '}</dd>
             </dl>
           </Count>
           <Link passHref href="/">
             <Count>
               <dl>
                 <dt>フォロー</dt>
-                <dd>{totalFollows}</dd>
+                <dd>{totalFollows ?? ' '}</dd>
               </dl>
             </Count>
           </Link>
           <Link passHref href="/">
             <Count>
               <dt>フォロワー</dt>
-              <dd>{totalFollowers}</dd>
+              <dd>{totalFollowers ?? ' '}</dd>
             </Count>
           </Link>
         </Counts>
@@ -61,6 +89,15 @@ const UserProfile: FC<Props> = ({
         {isMe && (
           <Button href="/account/edit" variant="outlined">
             プロフィールを編集
+          </Button>
+        )}
+        {!isMe && me.isLogin && (
+          <Button
+            disabled={toggleFollowButtonLoading}
+            onClick={handleToggleFollow}
+            variant="outlined"
+          >
+            {isFollow ? 'フォローする' : 'フォロー解除'}
           </Button>
         )}
       </Footer>

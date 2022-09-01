@@ -1,9 +1,10 @@
 import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
-import type { User } from '@/types/user';
+import type { UserDetail } from '@/types/user';
 import type { ReactElement } from 'react';
 import { APP_NAME } from '@/constants/service';
 import { getUser } from '@/repositories/user/get';
+import { useCallback } from 'react';
 import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import {
   useGetFollowsByDisplayIdSWR,
@@ -17,7 +18,7 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 
 type Props = {
-  user: User;
+  user: UserDetail;
 };
 
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
@@ -25,12 +26,17 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
     displayId: user.displayId,
     limit: 9,
   });
-  const { data: followsData } = useGetFollowsByDisplayIdSWR({
+  const { data: followsData, mutate: followsMutate } = useGetFollowsByDisplayIdSWR({
     displayId: user.displayId,
   });
-  const { data: followersData } = useGetFollowersByDisplayIdSWR({
+  const { data: followersData, mutate: followersMutate } = useGetFollowersByDisplayIdSWR({
     displayId: user.displayId,
   });
+
+  const handleMutation = useCallback(()=>{
+    followsMutate();
+    followersMutate();
+  },[followsMutate, followersMutate])
 
   return (
     <Fragment>
@@ -42,6 +48,7 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
         <Container sx={{ mb: 2 }}>
           <UserProfile
             user={user}
+            handleMutation={handleMutation}
             totalPosts={postsData?.total}
             totalFollows={followsData?.total}
             totalFollowers={followersData?.total}
