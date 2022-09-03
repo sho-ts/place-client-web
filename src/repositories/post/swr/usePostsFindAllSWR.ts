@@ -11,7 +11,7 @@ type Args = {
 
 const usePostsFindAllSWR = (args?: Args) => {
   const query = queryBuilder({
-    search: args?.search,
+    s: args?.search,
     displayId: args?.displayId,
     limit: args?.limit ?? 12,
   });
