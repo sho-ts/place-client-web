@@ -2,6 +2,8 @@ import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
 import type { Post } from '@/types/post';
 
+import { APP_NAME } from '@/constants/service';
+
 import { getPost } from '@/repositories/post/get';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -12,6 +14,7 @@ import { TypographyHeader } from '@/components/molecules';
 import { PostComment, PostCommentForm } from '@/components/organisms/post';
 import { Layout, Wrapper, Container } from '@/components/templates';
 import { Fragment } from 'react';
+import Head from 'next/head';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
@@ -37,6 +40,9 @@ const PostCommentsPage: NextPageWithLayout<Props> = ({ post }) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{`${post.user.displayId}さんの投稿 | ${APP_NAME}`}</title>
+      </Head>
       <TypographyHeader
         renderLeft={() => (
           <IconButton onClick={router.back}>
