@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import type { Post } from '@/types/post';
 import { styled } from '@mui/material/styles';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import {
   PostAuthor,
   PostCaption,
@@ -9,7 +11,6 @@ import {
 } from '@/components/organisms/post';
 import { Container } from '@/components/templates';
 import Box from '@mui/material/Box';
-import MUIContainer from '@mui/material/Container';
 import { Fragment } from 'react';
 import Image from 'next/image';
 
@@ -18,6 +19,12 @@ type Props = {
 };
 
 const PostArticleMobile: FC<Props> = ({ post }) => {
+  const router = useRouter();
+
+  const handleCommentsButtonClick = useCallback(() => {
+    router.push(`/post/${post.postId}/comments`);
+  }, [post]);
+
   return (
     <Fragment>
       <Container>
@@ -27,7 +34,11 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
         <Image src={post.files[0].url} layout="fill" objectFit="cover" />
       </ImageWrapper>
       <Container>
-        <PostIconButtons post={post} sx={{ mb: 1 }} />
+        <PostIconButtons
+          post={post}
+          sx={{ mb: 1 }}
+          handleCommentsButtonClick={handleCommentsButtonClick}
+        />
         <PostCaption post={post} />
         <PostCreatedAt createdAt={post.createdAt} sx={{ mt: 1 }} />
       </Container>
