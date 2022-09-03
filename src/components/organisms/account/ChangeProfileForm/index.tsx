@@ -10,8 +10,10 @@ import { useUserState } from '@/states';
 import { Button } from '@/components/atoms';
 import { TypographyHeader } from '@/components/molecules';
 import { Container, Wrapper } from '@/components/templates';
-import MUIAvatar from '@mui/material/Avatar'
+import MUIAvatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 import { Fragment } from 'react';
 
 const ChangeProfileForm: FC = () => {
@@ -90,9 +92,9 @@ const ChangeProfileForm: FC = () => {
     <Fragment>
       <TypographyHeader
         renderLeft={() => (
-          <Button href={`/${user.displayId}`} size="small" variant="outlined">
-            戻る
-          </Button>
+          <IconButton onClick={router.back}>
+            <ArrowBackIos sx={{ color: '#333' }} />
+          </IconButton>
         )}
         renderRight={() => (
           <Button
