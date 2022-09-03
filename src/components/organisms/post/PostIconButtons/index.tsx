@@ -15,9 +15,10 @@ import ChatBubbleOutlineOutlined from '@mui/icons-material/ChatBubbleOutlineOutl
 type Props = {
   post: Post;
   sx?: SxProps;
+  handleCommentsButtonClick?: () => void;
 };
 
-const PostIconButtons: FC<Props> = ({ post, sx }) => {
+const PostIconButtons: FC<Props> = ({ post, sx, handleCommentsButtonClick }) => {
   const [user] = useUserState();
   const router = useRouter();
   const [liked, setLiked] = useState(!!post.liked);
@@ -46,7 +47,7 @@ const PostIconButtons: FC<Props> = ({ post, sx }) => {
           <FavoriteBorder sx={{ color: '#333' }} />
         )}
       </IconButton>
-      <IconButton>
+      <IconButton onClick={handleCommentsButtonClick}>
         <ChatBubbleOutlineOutlined sx={{ color: '#333' }} />
       </IconButton>
     </Box>
