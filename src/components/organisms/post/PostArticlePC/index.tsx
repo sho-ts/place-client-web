@@ -9,9 +9,7 @@ import {
   PostIconButtons,
 } from '@/components/organisms/post';
 import { Container } from '@/components/templates';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Image from 'next/image';
 
 type Props = {
@@ -54,7 +52,7 @@ const PostArticlePC: FC<Props> = ({ post }) => {
             <PostIconButtons post={post} />
           </IconsContainer>
           <AddCommentContainer>
-            <PostCommentForm post={post} mutate={mutate} />
+            <PostCommentForm postId={post.postId} mutate={mutate} />
           </AddCommentContainer>
         </PostBody>
       </PostBox>
