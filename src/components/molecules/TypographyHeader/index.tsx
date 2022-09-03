@@ -41,6 +41,7 @@ const Ends = styled('div')`
 const Inner = styled(Box)(() => ({
   position: 'relative',
   display: 'flex',
+  alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
 }));
