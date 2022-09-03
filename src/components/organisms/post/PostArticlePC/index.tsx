@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { Post, Comment } from '@/types/post';
 import { styled } from '@mui/material/styles';
+import { useRef, useCallback } from 'react';
 import { useGetPostCommentSWR } from '@/repositories/comment/swr';
 import {
   PostAuthor,
@@ -17,6 +18,8 @@ type Props = {
 };
 
 const PostArticlePC: FC<Props> = ({ post }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const caption: Comment = {
     user: post.user,
     content: post.caption,
@@ -24,6 +27,10 @@ const PostArticlePC: FC<Props> = ({ post }) => {
   };
 
   const { data, mutate } = useGetPostCommentSWR(post.postId);
+
+  const handleCommentButtonClick = useCallback(() => {
+    inputRef.current?.focus();
+  }, [inputRef]);
 
   return (
     <Container>
@@ -49,10 +56,13 @@ const PostArticlePC: FC<Props> = ({ post }) => {
               ))}
           </CommentContainer>
           <IconsContainer>
-            <PostIconButtons post={post} />
+            <PostIconButtons
+              handleCommentsButtonClick={handleCommentButtonClick}
+              post={post}
+            />
           </IconsContainer>
           <AddCommentContainer>
-            <PostCommentForm postId={post.postId} mutate={mutate} />
+            <PostCommentForm inputRef={inputRef} postId={post.postId} mutate={mutate} />
           </AddCommentContainer>
         </PostBody>
       </PostBox>

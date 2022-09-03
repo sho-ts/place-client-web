@@ -1,4 +1,4 @@
-import type { FC, ChangeEventHandler } from 'react';
+import type { FC, ChangeEventHandler, RefObject } from 'react';
 import type { KeyedMutator } from 'swr';
 import type { CommentsFindAllResponse } from '@/types/response/comment';
 import type { SxProps } from '@mui/system/styleFunctionSx';
@@ -12,10 +12,11 @@ import TextField from '@mui/material/TextField';
 type Props = {
   sx?: SxProps;
   postId: string;
+  inputRef?: RefObject<HTMLInputElement>;
   mutate: KeyedMutator<CommentsFindAllResponse>;
 };
 
-const PostCommentForm: FC<Props> = ({ postId, mutate, sx }) => {
+const PostCommentForm: FC<Props> = ({ postId, mutate, sx, inputRef }) => {
   const [user] = useUserState();
   const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,6 +45,7 @@ const PostCommentForm: FC<Props> = ({ postId, mutate, sx }) => {
     <Base sx={sx}>
       {!user.isLogin && <Guard>コメントするにはログインしてください</Guard>}
       <TextField
+        inputRef={inputRef}
         label="コメントを追加..."
         variant="filled"
         size="small"
