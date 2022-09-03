@@ -3,6 +3,7 @@ import type { KeyedMutator } from 'swr';
 import type { CommentsFindAllResponse } from '@/types/response/comment';
 import type { SxProps } from '@mui/system/styleFunctionSx';
 import { styled } from '@mui/material/styles';
+import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';
 import { createComment } from '@/repositories/comment/post';
 import Button from '@mui/material/Button';
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const PostCommentForm: FC<Props> = ({ postId, mutate, sx }) => {
+  const [user] = useUserState();
   const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,6 +42,7 @@ const PostCommentForm: FC<Props> = ({ postId, mutate, sx }) => {
 
   return (
     <Base sx={sx}>
+      {!user.isLogin && <Guard>コメントするにはログインしてください</Guard>}
       <TextField
         label="コメントを追加..."
         variant="filled"
@@ -61,8 +64,26 @@ const PostCommentForm: FC<Props> = ({ postId, mutate, sx }) => {
 };
 
 const Base = styled('div')`
+  position: relative;
   display: flex;
   width: 100%;
+`;
+
+const Guard = styled('div')`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  color: #fff;
+  cursor: not-allowed;
+  z-index: 10;
 `;
 
 export default PostCommentForm;
