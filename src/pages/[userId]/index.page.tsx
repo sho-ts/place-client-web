@@ -1,10 +1,7 @@
-import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
-import type { UserDetail } from '@/types/user';
 import type { ReactElement } from 'react';
+import type { Props } from '@/server/user/getServerSidePropsUser';
 import { APP_NAME } from '@/constants/service';
-import nookies from 'nookies';
-import { getUser } from '@/repositories/user/get';
 import { useCallback } from 'react';
 import { usePostsFindAllSWR } from '@/repositories/post/swr';
 import {
@@ -17,10 +14,6 @@ import { UserProfile } from '@/components/organisms/user';
 import { Layout, Container, Wrapper } from '@/components/templates';
 import { Fragment } from 'react';
 import Head from 'next/head';
-
-type Props = {
-  user: UserDetail;
-};
 
 const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
   const { data: postsData } = usePostsFindAllSWR({
@@ -73,30 +66,7 @@ const UserProfilePage: NextPageWithLayout<Props> = ({ user }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const displayId = context.query.userId;
-  const cookies = nookies.get(context);
-
-  try {
-    if (!displayId || typeof displayId === 'object') {
-      throw new Error('ユーザーIDが不正です');
-    }
-
-    const response = await getUser({ displayId, requestUserId: cookies.sub });
-
-    return {
-      props: {
-        user: response.data,
-      },
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
-};
+export { default as getServerSideProps } from '@/server/user/getServerSidePropsUser';
 
 UserProfilePage.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
 

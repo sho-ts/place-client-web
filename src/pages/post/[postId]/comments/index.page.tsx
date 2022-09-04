@@ -1,10 +1,8 @@
-import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '@/types/page';
-import type { Post } from '@/types/post';
+import type { Props } from '@/server/post/getServerSidePropsPost';
 
 import { APP_NAME } from '@/constants/service';
 
-import { getPost } from '@/repositories/post/get';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useGetPostCommentSWR } from '@/repositories/comment/swr';
@@ -17,10 +15,6 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
-
-type Props = {
-  post: Post;
-};
 
 const PostCommentsPage: NextPageWithLayout<Props> = ({ post }) => {
   const matches = useMediaQuery('(max-width:700px)');
@@ -80,29 +74,7 @@ const PostCommentsPage: NextPageWithLayout<Props> = ({ post }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
-  const postId = context.query.postId;
-
-  try {
-    if (!postId || typeof postId === 'object') {
-      throw new Error('投稿IDが不正です');
-    }
-
-    const { data } = await getPost(postId);
-
-    return {
-      props: {
-        post: data,
-      },
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
-  }
-};
+export { default as getServerSideProps } from '@/server/post/getServerSidePropsPost';
 
 PostCommentsPage.getLayout = (page) => {
   return <Layout>{page}</Layout>;
