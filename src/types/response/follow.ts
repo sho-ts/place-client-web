@@ -1,11 +1,11 @@
-import type { User } from '@/types/user';
+import type { FollowUser } from '@/types/follow';
 
 export type GetFollowsByDisplayIdResponse = {
-  items: User[];
+  items: FollowUser[];
   total: number;
 };
 
 export type GetFollowersByDisplayIdResponse = {
-  items: User[];
+  items: FollowUser[];
   total: number;
 };
