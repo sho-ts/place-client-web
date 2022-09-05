@@ -105,7 +105,7 @@ const UserProfile: FC<Props> = ({
           <Button
             disabled={toggleFollowButtonLoading}
             onClick={handleToggleFollow}
-            variant="outlined"
+            variant={isFollow ? 'contained' : 'outlined'}
           >
             {isFollow ? 'フォロー解除' : 'フォローする'}
           </Button>
@@ -114,12 +114,16 @@ const UserProfile: FC<Props> = ({
       <UserListModal
         isOpen={isFollowModalOpen}
         handleRequestClose={handleFollowModalClose}
-        renderUserList={(props) => <FollowUserList displayId={user.displayId} {...props} />}
+        renderUserList={(props) => (
+          <FollowUserList displayId={user.displayId} {...props} />
+        )}
       />
       <UserListModal
         isOpen={isFollowerModalOpen}
         handleRequestClose={handleFollowerModalClose}
-        renderUserList={(props) => <FollowerUserList displayId={user.displayId} {...props} />}
+        renderUserList={(props) => (
+          <FollowerUserList displayId={user.displayId} {...props} />
+        )}
       />
     </Fragment>
   );
