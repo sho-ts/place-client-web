@@ -5,12 +5,14 @@ import useSWR from 'swr';
 
 type Args = {
   displayId: string;
+  userId?: string;
   limit?: number;
 };
 
 const useGetFollowsByDisplayIdSWR = (args: Args) => {
   const query = queryBuilder({
-    limit: args?.limit ?? 10,
+    userId: args.userId,
+    limit: args.limit ?? 10,
   });
 
   return useSWR<GetFollowsByDisplayIdResponse>(
