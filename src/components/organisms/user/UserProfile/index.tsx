@@ -3,11 +3,16 @@ import type { FC } from 'react';
 import { FOLLOW_STATUS } from '@/constants/follow';
 import { styled } from '@mui/material/styles';
 import { toggleFollow } from '@/repositories/follow/put';
+import { useModal } from '@/hooks';
 import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@/components/atoms';
-import Link from 'next/link';
+import { UserListModal } from '@/components/organisms/user';
+import {
+  FollowUserList,
+  FollowerUserList,
+} from '@/components/organisms/follow';
 import { Fragment } from 'react';
 
 type Props = {
@@ -25,8 +30,17 @@ const UserProfile: FC<Props> = ({
   totalFollowers,
   handleMutation,
 }) => {
+  const [isFollowModalOpen, handleFollowModalOpen, handleFollowModalClose] =
+    useModal();
+  const [
+    isFollowerModalOpen,
+    handleFollowerModalOpen,
+    handleFollowerModalClose,
+  ] = useModal();
+
   const [me] = useUserState();
   const isMe = user.userId === me.userId;
+
   const [isFollow, setIsFollow] = useState(
     user.followStatus === FOLLOW_STATUS.FOLLOW
   );
@@ -65,20 +79,16 @@ const UserProfile: FC<Props> = ({
               <dd>{totalPosts ?? ' '}</dd>
             </dl>
           </Count>
-          <Link passHref href="/">
-            <Count>
-              <dl>
-                <dt>フォロー</dt>
-                <dd>{totalFollows ?? ' '}</dd>
-              </dl>
-            </Count>
-          </Link>
-          <Link passHref href="/">
-            <Count>
-              <dt>フォロワー</dt>
-              <dd>{totalFollowers ?? ' '}</dd>
-            </Count>
-          </Link>
+          <Count as="button" onClick={handleFollowModalOpen}>
+            <dl>
+              <dt>フォロー</dt>
+              <dd>{totalFollows ?? ' '}</dd>
+            </dl>
+          </Count>
+          <Count as="button" onClick={handleFollowerModalOpen}>
+            <dt>フォロワー</dt>
+            <dd>{totalFollowers ?? ' '}</dd>
+          </Count>
         </Counts>
       </Header>
       <Body sx={{ mb: 2 }}>
@@ -101,6 +111,16 @@ const UserProfile: FC<Props> = ({
           </Button>
         )}
       </Footer>
+      <UserListModal
+        isOpen={isFollowModalOpen}
+        handleRequestClose={handleFollowModalClose}
+        renderUserList={(props) => <FollowUserList displayId={user.displayId} {...props} />}
+      />
+      <UserListModal
+        isOpen={isFollowerModalOpen}
+        handleRequestClose={handleFollowerModalClose}
+        renderUserList={(props) => <FollowerUserList displayId={user.displayId} {...props} />}
+      />
     </Fragment>
   );
 };
