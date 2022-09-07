@@ -8,7 +8,7 @@ type Props = {
   h?: number;
 };
 
-const Logo: FC<Props> = ({ w = 117, h = 29 }) => {
+const Logo: FC<Props> = ({ w = 186, h = 32 }) => {
   return (
     <AppLogo>
       <Image width={w} height={h} src="/logo.png" alt="" />
