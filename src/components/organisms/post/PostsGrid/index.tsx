@@ -22,7 +22,14 @@ const PostsGrid: FC<Props> = ({ posts, xs, md, spacing = 1 }) => {
           <Item>
             <Link href={`/post/${postId}`}>
               <a>
-                <Image src={thumbnail} layout="fill" objectFit="cover" />
+                <Image
+                  src={thumbnail}
+                  layout='responsive'
+                  objectFit="cover"
+                  width="400"
+                  height="400"
+                  quality={60}
+                />
               </a>
             </Link>
           </Item>
@@ -32,9 +39,13 @@ const PostsGrid: FC<Props> = ({ posts, xs, md, spacing = 1 }) => {
   );
 };
 
-const Item = styled(Box)(() => ({
-  position: 'relative',
-  paddingTop: '120%',
-}));
+const Item = styled(Box)`
+  position: relative;
+  a {
+    & > span {
+      position: static !important;
+    }
+  }
+`;
 
 export default PostsGrid;

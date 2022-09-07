@@ -31,7 +31,7 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
         <PostAuthor sx={{ pb: 2 }} user={post.user} />
       </Container>
       <ImageWrapper>
-        <Image src={post.files[0].url} layout="fill" objectFit="cover" />
+        <Image src={post.files[0].url} layout='responsive' objectFit="cover" width='600' height='600' />
       </ImageWrapper>
       <Container>
         <PostIconButtons
@@ -46,10 +46,10 @@ const PostArticleMobile: FC<Props> = ({ post }) => {
   );
 };
 
-const ImageWrapper = styled(Box)(() => ({
-  margin: '0 auto 8px',
-  position: 'relative',
-  paddingTop: '140%',
-}));
+const ImageWrapper = styled(Box)`
+  margin: 0 auto 8px;
+  position: relative;
+
+`
 
 export default PostArticleMobile;
