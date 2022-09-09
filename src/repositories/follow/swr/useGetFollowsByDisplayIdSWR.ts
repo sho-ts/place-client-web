@@ -17,7 +17,8 @@ const useGetFollowsByDisplayIdSWR = (args: Args) => {
 
   return useSWR<GetFollowsByDisplayIdResponse>(
     `${process.env.NEXT_PUBLIC_API_URL}/v1/users/${args.displayId}/follows${query}`,
-    (url) => axios.get(url).then((res) => res.data)
+    (url) => axios.get(url).then((res) => res.data),
+    { refreshInterval: 2000 }
   );
 };
 
