@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { toggleFollow } from '@/repositories/follow/put';
 import { useModal } from '@/hooks';
 import { useUserState } from '@/states';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@/components/atoms';
 import { UserListModal } from '@/components/organisms/user';
@@ -44,6 +44,11 @@ const UserProfile: FC<Props> = ({
   const [isFollow, setIsFollow] = useState(
     user.followStatus === FOLLOW_STATUS.FOLLOW
   );
+
+  useEffect(() => {
+    setIsFollow(user.followStatus === FOLLOW_STATUS.FOLLOW);
+  }, [user.followStatus]);
+
   const [toggleFollowButtonLoading, setToggleFollowButtonLoading] =
     useState(false);
 
