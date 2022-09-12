@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         router.push('/home');
       })
       .catch(() => {
-        router.push('/explore');
+        router.push('/login');
       })
       .finally(() => {
         setChecked(true);
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         <title>{`${APP_NAME}`}</title>
       </Head>
       <Base>
-        <Logo w={175} h={43} />
+        <Logo />
       </Base>
     </Fragment>
   );
