@@ -11,7 +11,7 @@ class ImageService {
     });
   }
 
-  public async getCroppedImageUrl(src: string, crop: Area): Promise<string> {
+  public async getCroppedImage(src: string, crop: Area): Promise<Blob> {
     const image = await this.createImageElement(src);
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d')!;
@@ -28,10 +28,10 @@ class ImageService {
 
     ctx.putImageData(data, 0, 0);
 
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<Blob>((resolve, reject) => {
       canvas.toBlob((file) => {
         file
-          ? resolve(URL.createObjectURL(file))
+          ? resolve(file)
           : reject(new Error('file is undefined'));
       }, 'image/jpeg');
     });
