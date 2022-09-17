@@ -7,5 +7,6 @@ export { default as PostCommentForm } from './PostCommentForm';
 export { default as PostComment } from './PostComment';
 export { default as PostComposeForm } from './PostComposeForm';
 export { default as PostCreatedAt } from './PostCreatedAt';
+export { default as PostCropImageModal } from './PostCropImageModal';
 export { default as PostIconButtons } from './PostIconButtons';
 export { default as PostsGrid } from './PostsGrid';
