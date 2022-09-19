@@ -1,49 +1,50 @@
-import type { FC, ChangeEvent } from 'react';
+import type { FC } from 'react';
 
 import { AuthService } from '@/services';
 import { getMe } from '@/repositories/user/get';
+import { yup } from '@/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useUserState } from '@/states';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Button, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
+type FormData = {
+  email: string;
+  password: string;
+};
+
+const schema = yup.object().shape({
+  email: yup.string().required(),
+  password: yup
+    .string()
+    .min(8)
+    .max(24)
+    .matches(/^[a-zA-Z0-9!-/:-@¥[-`{-~ ]*$/)
+    .required(),
+});
+
 const LoginForm: FC = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [, setUser] = useUserState();
 
-  const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+  const { register, handleSubmit, formState } = useForm<FormData>({
+    resolver: yupResolver(schema),
   });
 
-  const changeEmailValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        email: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const changePasswordValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        password: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const handleLogin = useCallback(async () => {
+  const onSubmit = useCallback(async (data: FormData) => {
+    setLoading(true);
     const authService = new AuthService();
+
     try {
-      await authService.login(formValues.email, formValues.password);
+      await authService.login(data.email, data.password);
 
       const response = await getMe();
       setUser({
@@ -53,35 +54,38 @@ const LoginForm: FC = () => {
 
       router.push('/home');
     } catch (error) {
-      alert('ログインに失敗しました');
+      setLoading(false);
+      alert('Eメールかパスワードが違います');
     }
-  }, [formValues]);
+  }, []);
 
   return (
     <Fragment>
       <TextField
-        onChange={changeEmailValue}
         sx={{ mb: 2 }}
         fullWidth
         label="メールアドレス"
         variant="filled"
-        value={formValues.email}
+        error={'email' in formState.errors}
+        helperText={formState.errors.email?.message}
+        {...register('email')}
       />
       <TextField
         type="password"
-        onChange={changePasswordValue}
         sx={{ mb: 2 }}
         fullWidth
         label="パスワード"
         variant="filled"
-        value={formValues.password}
+        error={'password' in formState.errors}
+        helperText={formState.errors.password?.message}
+        {...register('password')}
       />
       <Button
         size="large"
         position="center"
-        disabled={!formValues.email || !formValues.password}
+        disabled={loading}
         variant="contained"
-        onClick={handleLogin}
+        onClick={handleSubmit(onSubmit)}
       >
         ログイン
       </Button>
