@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import CryptoJS from 'crypto-js';
-import * as yup from 'yup';
+import { yup } from '@/utils';
 import { AuthService } from '@/services';
 import { yupResolver } from '@hookform/resolvers/yup';
 
