@@ -1,121 +1,116 @@
-import type { FC, ChangeEvent } from 'react';
+import type { FC } from 'react';
 
 import CryptoJS from 'crypto-js';
+import * as yup from 'yup';
 import { AuthService } from '@/services';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Button, TextLink } from '@/components/atoms';
 import { Fragment } from 'react';
 
+type FormData = {
+  email: string;
+  userId: string;
+  name: string;
+  password: string;
+};
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  userId: yup
+    .string()
+    .matches(/^[0-9a-zA-Z]+$/)
+    .required(),
+  name: yup.string().required(),
+  password: yup
+    .string()
+    .min(8)
+    .max(24)
+    .matches(/^[a-zA-Z0-9!-/:-@¥[-`{-~ ]*$/)
+    .required(),
+});
+
 const RegisterForm: FC = () => {
   const router = useRouter();
-
-  const [formValues, setFormValues] = useState({
-    email: '',
-    userId: '',
-    name: '',
-    password: '',
+  const [loading, setLoading] = useState<boolean>(false);
+  const { register, handleSubmit, formState } = useForm<FormData>({
+    resolver: yupResolver(schema),
   });
 
-  const changeEmailValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        email: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const changePasswordValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        password: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const changeNameValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        name: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const changeUserIdValue = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFormValues({
-        ...formValues,
-        userId: event.target.value,
-      });
-    },
-    [formValues]
-  );
-
-  const handleRegister = useCallback(async () => {
+  const onSubmit = useCallback(async (formData: FormData) => {
+    setLoading(true);
     const authService = new AuthService();
+
     try {
       await authService.register(
-        formValues.name,
-        formValues.userId,
-        formValues.email,
-        formValues.password
+        formData.name,
+        formData.userId,
+        formData.email,
+        formData.password
       );
-      router.push(`/register/verify?e=${CryptoJS.AES.encrypt(formValues.email, process.env.NEXT_PUBLIC_CRYPTO_KEY)}`);
+      router.push(
+        `/register/verify?e=${CryptoJS.AES.encrypt(
+          formData.email,
+          process.env.NEXT_PUBLIC_CRYPTO_KEY
+        )}`
+      );
     } catch (error) {
+      setLoading(false);
       alert('新規登録に失敗しました');
     }
-  }, [formValues]);
+  }, []);
 
   return (
     <Fragment>
       <TextField
-        onChange={changeUserIdValue}
         sx={{ mb: 2 }}
         fullWidth
         label="ユーザーID"
         variant="filled"
-        value={formValues.userId}
+        error={'userId' in formState.errors}
+        helperText={formState.errors.userId?.message}
+        {...register('userId')}
       />
       <TextField
-        onChange={changeNameValue}
         sx={{ mb: 2 }}
         fullWidth
         label="ニックネーム"
         variant="filled"
-        value={formValues.name}
+        error={'name' in formState.errors}
+        helperText={formState.errors.name?.message}
+        {...register('name')}
       />
       <TextField
-        onChange={changeEmailValue}
         sx={{ mb: 2 }}
         fullWidth
         label="メールアドレス"
         variant="filled"
-        value={formValues.email}
+        error={'email' in formState.errors}
+        helperText={formState.errors.email?.message}
+        {...register('email')}
       />
       <TextField
         type="password"
-        onChange={changePasswordValue}
         sx={{ mb: 2 }}
         fullWidth
         label="パスワード"
         variant="filled"
-        value={formValues.password}
+        error={'password' in formState.errors}
+        helperText={formState.errors.password?.message}
+        {...register('password')}
       />
       <Button
+        disabled={loading}
         size="large"
         position="center"
-        disabled={!formValues.email || !formValues.password}
         variant="contained"
-        onClick={handleRegister}
+        onClick={handleSubmit(onSubmit)}
       >
         新規登録
       </Button>
